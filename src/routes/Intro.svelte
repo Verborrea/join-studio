@@ -1,4 +1,8 @@
 <script>
+	import { createEventDispatcher } from 'svelte'
+
+	const dispatch = createEventDispatcher()
+
 	let showContainer1 = true
 	let showContainer2 = false
 
@@ -12,6 +16,7 @@
 	function stage2(e) {
 		if (e.animationName === "bigtime") {
 			showContainer2 = false;
+			dispatch('ready')
 		}
 	}
 </script>
@@ -50,44 +55,23 @@
 		align-items: center;
 		justify-content: center;
 	}
-	p, .up, .down {
-		font-size: 420px;
-	}
 	p {
+		font-size: 52vw;
 		white-space: nowrap;
 		text-align: center;
-		animation: smalltime 2s ease-out 0s backwards, bigtime 2s ease-in 2s forwards;
+		animation: smalltime 1.25s ease-out 0s backwards, bigtime 1.25s ease-in 1.25s forwards;
 	}
 	.up, .down {
+		font-size: 100vw;
 		line-height: 1;
 		font-weight: 600;
 	}
 	.up {
     transform-origin: bottom;
-		animation: smalltime 2s ease-out 0s backwards, bigtime 2s ease-in 2s forwards;
+		animation: smalltime 1.25s ease-out 0s backwards, bigtime 1.25s ease-in 1.25s forwards;
 	}
 	.down {
 		transform-origin: top;
-		animation: smalltime 2s ease-out 1s backwards, bigtime 2s ease-in 3s forwards;
-	}
-	@keyframes smalltime {
-		0% {
-			transform: scale(0.01);
-			opacity: 0;
-		}
-		100% {
-			transform: scale(0.1);
-			opacity: 1;
-		}
-	}
-	@keyframes bigtime {
-		0% {
-			transform: scale(0.1);
-			opacity: 1;
-		}
-		100% {
-			transform: scale(1);
-			opacity: 0;
-		}
+		animation: smalltime 1.25s ease-out 0.5s backwards, bigtime 1.25s ease-in 1.75s forwards;
 	}
 </style>

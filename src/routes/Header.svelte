@@ -115,6 +115,9 @@
 </header>
 
 <style>
+	header {
+		animation: help	1.5s;
+	}
 	a, .bbtn {
 		font-weight: 500;
 		font-size: 18px;
@@ -145,7 +148,7 @@
 		padding: 5em 24px;
 
 		opacity: 0;
-		transform: translateX(100%);
+		transform: translateX(-100%);
 		transition: .5s ease-in-out;
 	}
 	.menu.active {
@@ -158,6 +161,18 @@
 	}
 	.menu a:hover {
 		color: inherit;
+	}
+
+	@keyframes help {
+		from {
+			scale: 1.25;
+			transform: translateX(-25%);
+			opacity: 0;
+		} to {
+			scale: 1;
+			transform: translateX(0);
+			opacity: 1;
+		}
 	}
 
 	@media (max-width: 800px) {
