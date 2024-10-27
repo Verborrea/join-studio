@@ -1,6 +1,14 @@
 <script>
 	let isFullScreenSize = false
 	let hoverInterval
+	let active = false
+	let text = 'menú'
+	let darkTheme = false
+
+	function toggleMode() {
+		darkTheme = !darkTheme
+		document.body.classList.toggle('dark')
+	}
 
 	function toggleClick() {
 		if (isFullScreenSize) {
@@ -30,7 +38,6 @@
 				isFullScreenSize = false
 			}
 		}
-		
 	}
 
 	function startHoverEffect() {
@@ -52,6 +59,11 @@
 			el.className = `c${(currentIndex - 1 + 6 ) % 6}`
 		})
 	}
+
+	function toggleMenu() {
+		active = !active
+		text = active ? 'close' : 'menú'
+	}
 </script>
 
 <header class="fc p32 between">
@@ -66,15 +78,18 @@
 			<span class="c5">o</span>
 		</span>
 	</a>
-	<button type="button" class="menu">menú</button>
 	<nav class="fc g32">
 		<a href="/">Talento</a>
 		<a href="/">Trabajo</a>
 		<a href="/">Nosotros</a>
 	</nav>
 	<div class="btns fc g32">
-		<button type="button" title="Modo Oscuro" aria-label="Modo Oscuro">
+		<button type="button" title="Modo Oscuro" aria-label="Cambiar Modo" onclick={toggleMode}>
+			{#if darkTheme}
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+			{:else}
 			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+			{/if}
 		</button>
 		<button type="button" title="Maximizar" aria-label="Maximizar" onclick={toggleClick}>
 			{#if isFullScreenSize}
@@ -85,17 +100,29 @@
 		</button>
 		<button type="button" class="btn">Hablemos</button>
 	</div>
+
+	<div class="menu fcol g32 between" class:active>
+		<nav class="fcol">
+			<a href="/">Inicio</a>
+			<a href="/">Talento</a>
+			<a href="/">Trabajo</a>
+			<a href="/">Nosotros</a>
+		</nav>
+		<button type="button" class="btn">Hablemos</button>
+	</div>
+
+	<button type="button" class="bbtn" onclick={toggleMenu}>{text}</button>
 </header>
 
 <style>
-	a, .menu {
+	a, .bbtn {
 		font-weight: 500;
 		font-size: 18px;
 		line-height: 24px;
 		color: inherit;
 		text-decoration: none;
 	}
-	nav a:hover, .menu:hover {
+	nav a:hover {
 		color: gray;
 	}
 	.title {
@@ -104,14 +131,40 @@
 	.title>span {
 		display: inline-flex;
 	}
-	.menu {
+	.bbtn {
 		display: none;
+		z-index: 42;
 	}
+
+	.menu {
+		position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100dvh;
+    background: var(--red);
+		padding: 5em 24px;
+
+		opacity: 0;
+		transform: translateX(100%);
+		transition: .5s ease-in-out;
+	}
+	.menu.active {
+		opacity: 1;
+		transform: translateX(0);
+	}
+	.menu a {
+		font-size: 54px;
+		line-height: normal;
+	}
+	.menu a:hover {
+		color: inherit;
+	}
+
 	@media (max-width: 800px) {
-		.btns, nav {
+		header > .btns, header > nav {
 			display: none;
 		}
-		.menu {
+		.bbtn {
 			display: block;
 		}
 	}
