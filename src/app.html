@@ -65,6 +65,9 @@
 			button:active {
 				scale: 0.95;
 			}
+			svg {
+				display: block;
+			}
 			.between {
 				display: flex;
 				justify-content: space-between;
@@ -141,12 +144,12 @@
 			}
 			@keyframes bigtime {
 				0% {
+					/* line-height: 1; */
 					transform: scale(0.1);
-					opacity: 1;
 				}
 				100% {
-					transform: scale(1);
-					opacity: 0;
+					/* line-height: 0.5; */
+					transform: scale(10);
 				}
 			}
 		</style>

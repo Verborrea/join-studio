@@ -108,6 +108,24 @@
 			<a href="/">Trabajo</a>
 			<a href="/">Nosotros</a>
 		</nav>
+
+		<div class="btns fc">
+			<button type="button" title="Modo Oscuro" aria-label="Cambiar Modo" onclick={toggleMode}>
+				{#if darkTheme}
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+				{:else}
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+				{/if}
+			</button>
+			<button type="button" title="Maximizar" aria-label="Maximizar" onclick={toggleClick}>
+				{#if isFullScreenSize}
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-minimize-2"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" x2="21" y1="10" y2="3"/><line x1="3" x2="10" y1="21" y2="14"/></svg>
+				{:else}
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-maximize-2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" x2="14" y1="3" y2="10"/><line x1="3" x2="10" y1="21" y2="14"/></svg>
+				{/if}
+			</button>
+		</div>
+
 		<button type="button" class="btn">Hablemos</button>
 	</div>
 
@@ -156,8 +174,16 @@
 		transform: translateX(0);
 	}
 	.menu a {
+		color: white;
 		font-size: 54px;
 		line-height: normal;
+	}
+	.menu .fc {
+		justify-content: center;
+		gap: 1em;
+	}
+	.menu .btns button {
+		color: white;
 	}
 	.menu a:hover {
 		color: inherit;
