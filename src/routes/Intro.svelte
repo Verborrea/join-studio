@@ -94,6 +94,6 @@
 	}
 	.down {
 		transform-origin: top;
-		animation: smalltime 1.25s ease-out 0s backwards, bigtime 3s ease-in 1.25s forwards;
+		animation: smalltime 1.25s ease-out 0.5s backwards, bigtime 3s ease-in 1.75s forwards;
 	}
 </style>

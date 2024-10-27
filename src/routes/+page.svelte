@@ -51,9 +51,10 @@
 	}
 	p {
 		animation: help	1.5s;
-		line-height: 1;
+		line-height: 1.2;
 		font-size: 42px;
 		max-width: 30ch;
+		letter-spacing: -0.02em;
 	}
 
 	@media (max-width: 1000px) {
@@ -61,15 +62,12 @@
 			height: calc(100dvh - 94px);
 		}
 		p {
-			font-size: 36px;
+			font-size: 40px;
 		}
 	}
 	@media (max-width: 800px) {
 		main {
 			height: calc(100dvh - 72px);
-		}
-		p {
-			font-size: 24px;
 		}
 	}
 </style>
