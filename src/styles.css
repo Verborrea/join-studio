@@ -1,0 +1,59 @@
+@font-face {
+	font-family: 'Geist';
+	src: url('/Geist.woff2') format('woff2');
+	font-weight: 100 900;
+	font-stretch: 100%;
+}
+
+*, *::after, *::before {
+	box-sizing: border-box;
+}
+
+:root, input, button {
+	--bg: #EFEFEF;
+	--text: #1C1D20;
+	--text-low: #6D767E;
+	--tex-intput: #1C1D20;
+	--shadow: #00000080;
+	--red: #FF595E;
+	--ora: #FF7F3A;
+	--yel: #FFCA3A;
+	--gre: #8AC926;
+	--blu: #1982C4;
+	--vio: #6A4C93;
+
+	font-size: 18px;
+	line-height: 21px;
+	font-family: 'Geist', sans-serif;
+}
+
+body {
+	font-weight: 300;
+	color: var(--text);
+	background: var(--bg);
+}
+
+body, h1, p {
+	margin: 0;
+}
+
+svg {
+	display: block;
+}
+
+strong {
+	color: var(--text);
+	font-weight: 600;
+}
+
+button {
+	cursor: pointer;
+	display: block;
+	border: 0;
+	padding: 0;
+	transition: .2s ease-out;
+}
+
+button:active {
+	scale: 0.95;
+}
