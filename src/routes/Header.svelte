@@ -12,7 +12,12 @@
 </script>
 
 <header class="fc between g32 p32">
-	<a href="/" class="title">Join Studio</a>
+	<a href="/" id="title" class="title">Join Studio</a>
+	<nav id="nav" class="do fc g32">
+		<a href="/">Talento</a>
+		<a href="/">Trabajo</a>
+		<a href="/">Nosotros</a>
+	</nav>
 	<div class="do fc g32">
 		<button type="button" aria-label="Cambiar tema" title="Cambiar tema" onclick={toggleTheme}>
 			{#if mode}
@@ -27,14 +32,24 @@
 		<a href="https://wa.me/51940185837?text=Holis" target="_blank" class="btn">Hablemos</a>
 	</div>
 	<div class="mo">
-		<button type="button">menú</button>
+		<button class="menubtn" type="button">menú</button>
 	</div>
 </header>
 <style>
-	.title {
+	header {
+		z-index: 1;
+		position: fixed;
+		inset: 0 0 auto 0;
+		transition: 0.2s ease-in-out;
+	}
+	.title, nav a, .menubtn {
 		font-weight: 400;
 		color: inherit;
 		text-decoration: none;
+		line-height: calc(7 / 6);
+	}
+	nav a:hover {
+		color: var(--text-low);
 	}
 	.mo {
 		display: none;

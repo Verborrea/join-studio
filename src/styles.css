@@ -13,7 +13,7 @@
 	--bg: #EFEFEF;
 	--text: #1C1D20;
 	--text-low: #6D767E;
-	--tex-intput: #1C1D20;
+	--text-input: #1C1D20;
 	--shadow: #dcdcdc;
 	--red: #FF595E;
 	--ora: #FF7F3A;
@@ -21,14 +21,15 @@
 	--gre: #8AC926;
 	--blu: #1982C4;
 	--vio: #6A4C93;
+	--klk: #efefef80;
 
 	color-scheme: only light;
 }
 
 :root, input, button {
 	font-size: 18px;
-	line-height: 21px;
 	font-family: 'Geist', sans-serif;
+	letter-spacing: -0.01em;
 }
 
 body {
@@ -37,27 +38,11 @@ body {
 	background: var(--bg);
 }
 
-/* @media (prefers-color-scheme: dark) {
-	:root {
-		--bg: #1E1E1E;
-		--text: #EFEFEF;
-		--text-low: #A6A6A6;
-		--tex-intput: #1C1D20;
-		--shadow: #3c3c3c;
-		--red: #FF6C6C;
-		--ora: #FF9D68;
-		--yel: #FFD86E;
-		--gre: #BCEE70;
-		--blu: #70C4EE;
-		--vio: #ED99EC;
-	}
-} */
-
 body.dark {
 	--bg: #1E1E1E;
 	--text: #EFEFEF;
 	--text-low: #A6A6A6;
-	--tex-intput: #1C1D20;
+	--text-input: #1C1D20;
 	--shadow: #3c3c3c;
 	--red: #FF6C6C;
 	--ora: #FF9D68;
@@ -65,14 +50,23 @@ body.dark {
 	--gre: #BCEE70;
 	--blu: #70C4EE;
 	--vio: #ED99EC;
+	--klk: #1E1E1E80;
+
+	::selection {
+		color: var(--bg);
+	}
 }
 
 body, h1, p {
 	margin: 0;
 }
 
-svg {
+img, svg {
 	display: block;
+}
+
+img {
+	object-fit: cover;
 }
 
 strong {
@@ -89,6 +83,72 @@ button {
 	transition: .2s ease-out;
 }
 
-button:active {
+a:active, button:active {
 	scale: 0.95;
+}
+
+::selection {
+  background: var(--yel);
+}
+
+.c0 { animation-name: breathing_1 }
+.c1 { animation-name: breathing_2 }
+.c2 { animation-name: breathing_3 }
+.c3 { animation-name: breathing_4 }
+.c4 { animation-name: breathing_5 }
+.c5 { animation-name: breathing_6 }
+
+@keyframes breathing_1 {
+	0%   { color: var(--red); }
+	17%  { color: var(--vio); }
+	34%  { color: var(--blu); }
+	51%  { color: var(--gre); }
+	68%  { color: var(--yel); }
+	85%  { color: var(--ora); }
+	100% { color: var(--red); }
+}
+@keyframes breathing_2 {
+	0%   { color: var(--ora); }
+	17%  { color: var(--red); }
+	34%  { color: var(--vio); }
+	51%  { color: var(--blu); }
+	68%  { color: var(--gre); }
+	85%  { color: var(--yel); }
+	100% { color: var(--ora); }
+}
+@keyframes breathing_3 {
+	0%   { color: var(--yel); }
+	17%  { color: var(--ora); }
+	34%  { color: var(--red); }
+	51%  { color: var(--vio); }
+	68%  { color: var(--blu); }
+	85%  { color: var(--gre); }
+	100% { color: var(--yel); }
+}
+@keyframes breathing_4 {
+	0%   { color: var(--gre); }
+	17%  { color: var(--yel); }
+	34%  { color: var(--ora); }
+	51%  { color: var(--red); }
+	68%  { color: var(--vio); }
+	85%  { color: var(--blu); }
+	100% { color: var(--gre); }
+}
+@keyframes breathing_5 {
+	0%   { color: var(--blu); }
+	17%  { color: var(--gre); }
+	34%  { color: var(--yel); }
+	51%  { color: var(--ora); }
+	68%  { color: var(--red); }
+	85%  { color: var(--vio); }
+	100% { color: var(--blu); }
+}
+@keyframes breathing_6 {
+	0%   { color: var(--vio); }
+	17%  { color: var(--blu); }
+	34%  { color: var(--gre); }
+	51%  { color: var(--yel); }
+	68%  { color: var(--ora); }
+	85%  { color: var(--red); }
+	100% { color: var(--vio); }
 }

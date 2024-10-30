@@ -1,6 +1,6 @@
 <script>
 	import '../styles.css'
-	import '../general.css'
+	import '../utils.css'
 	import Header from './Header.svelte';
 </script>
 
