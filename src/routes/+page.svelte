@@ -133,6 +133,10 @@
 		display: flex;
 		align-items: flex-end;
     gap: 16px;
+		scrollbar-width: none;
+	}
+	.slider::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Edge */
 	}
 	.slide {
 		border-radius: 16px;
@@ -203,12 +207,17 @@
     	inset: 0;
 			z-index: -1;
 		}
-		.show>:global(img) {
+		.show>*>:global(img) {
 			width: 100%;
 			aspect-ratio: unset;
 			height: 100dvh;
 			border-radius: 0;
 			filter: brightness(0.75);
+		}
+		.slide :global(img){
+			width: auto;
+    	height: 120px;
+			border-radius: 12px;
 		}
 		.slider {
 			position: absolute;
@@ -218,6 +227,7 @@
 			overflow-x: scroll;
 			width: 100vw;
 			padding: 0 24px;
+			gap: 12px;
 		}
 		.slide:hover {
 			transform: none;
