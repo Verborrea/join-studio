@@ -32,7 +32,7 @@
 		<a href="https://wa.me/51940185837?text=Holis" target="_blank" class="btn">Hablemos</a>
 	</div>
 	<div class="mo">
-		<button class="menubtn" type="button">menú</button>
+		<button id="menu" class="menubtn" type="button">menú</button>
 	</div>
 </header>
 <style>
