@@ -18,7 +18,7 @@
 		if (seccionTop <= window.innerHeight) {
 			document.getElementById('title').style.opacity = '0';
 			document.getElementById('nav').style.opacity = '0';
-
+			document.getElementById('menu').style.color = 'var(--text)';
 		} else {
 			document.getElementById('title').style.opacity = '1';
 			document.getElementById('nav').style.opacity = '1';
@@ -171,6 +171,9 @@
 		}
 		.cositas, .copy {
 			display: contents;
+		}
+		header svg {
+			margin-top: 48px;
 		}
 	}
 </style>
