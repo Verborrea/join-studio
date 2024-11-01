@@ -52,7 +52,7 @@
 .c4 {color: var(--blu)}
 .c5 {color: var(--vio)}
 
-@media (max-width: 700px) {
+@media (max-width: 1000px) {
 	.g32 { gap: 24px }
 	.p32 { padding: 24px }
 }

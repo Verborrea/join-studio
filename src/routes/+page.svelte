@@ -1,166 +1,147 @@
 <script>
+	import Header from './Header.svelte';
 	import Footer from './Footer.svelte';
 	import { onMount } from 'svelte';
+	import { spring } from 'svelte/motion';
 
-	import First from '$lib/images/img1.png?enhanced';
-	import Secon from '$lib/images/img2.png?enhanced';
-	import Third from '$lib/images/img3.png?enhanced';
-	import Fourt from '$lib/images/img4.png?enhanced';
-	import Fifth from '$lib/images/img5.png?enhanced';
+	let coords = spring({ x: 300, y: 200 }, {
+		stiffness: 0.08,
+		damping: 0.3
+	});
 
-	let mouseX = 0;
-  let mouseY = 0;
-	let isLargeScreen = false;
-	let show;
+	let isDesktop = $state(true);
+	let contentText = $state("Explore más abajo");
+	let headerVisible = $state(false);
+	let main;
 
-	const handleMouseMove = (event) => {
-		if (isLargeScreen) {
-			mouseX = event.clientX;
-			mouseY = event.clientY;
-
-			console.log(mouseX, mouseY)
-		}
+	// Detectar si es desktop o mobile
+	const updateScreenSize = () => {
+		isDesktop = window.innerWidth > 1000; // Puedes ajustar el ancho de pantalla que define "desktop"
 	};
 
-	const handleResize = () => {
-		isLargeScreen = window.innerWidth > 700;
+	// Detectar si estamos debajo de 100vh
+	const checkScrollPosition = () => {
+		if (main.scrollY > window.innerHeight) {
+			contentText = "Has llegado abajo";
+		} else {
+			contentText = "Explore más abajo";
+		}
 	};
 
 	function handleScroll() {
-		const seccionTop = show.getBoundingClientRect().bottom - 36;
+		const target = document.getElementById('fotos');
+		if (!target) return;
 
-		if (!isLargeScreen) {
-			if (seccionTop <= window.innerHeight) {
-				document.getElementById('title').style.color = '#EFEFEF';
-				document.getElementById('menu').style.color = '#EFEFEF';
-			} else {
-				document.getElementById('title').style.color = 'var(--text)'
-				document.getElementById('menu').style.color = 'var(--text)';
-			}
-		} else {
-			document.getElementById('title').style.color = 'var(--text)'
-			document.getElementById('menu').style.color = 'var(--text)';
-		}
+		const { top, bottom } = target.getBoundingClientRect();
+
+		// Activa la clase solo cuando la parte superior de #fotos esté en la parte superior de la pantalla
+		// y se quita cuando la parte inferior del elemento pasa la parte superior de la pantalla
+		headerVisible = top <= 0 && bottom > 0;
 	}
 
+	// Eventos de montaje
 	onMount(() => {
-		isLargeScreen = window.innerWidth > 700;
-  });
+		document.querySelector('main').addEventListener('scroll', handleScroll);
+		updateScreenSize();
+		if (!isDesktop) {
+			coords.set({ x: 0, y: 0 });
+		}
+
+		return () => window.removeEventListener('scroll', handleScroll);
+	});
 </script>
 
-<svelte:window on:mousemove={handleMouseMove} onresize={handleResize} onscroll={handleScroll}/>
+<svelte:window 
+	onresize={updateScreenSize}
+	onmousemove={(e) => {
+		if (isDesktop) {
+			coords.set({ x: e.clientX, y: e.clientY });
+		}
+	}}
+/>
 
-<main>
-	<article class="p32 fc main">
+<main bind:this={main}>
+	<Header {headerVisible}/>
+	<section id="welcome" class="fcol fcc p32">
 		<p>
 			Bienvenido a <strong>Join
 			<span class="c0">S</span><span class="c1">t</span><span class="c2">u</span><span class="c3">d</span><span class="c4">i</span><span class="c5">o</span></strong>,
-			una agencia creativa donde
-			hacemos contenido de calidad especializado en tí.
+			una agencia creativa donde hacemos contenido de calidad especializado en tí.
 		</p>
-		<div class="scroll fc" style="transform: {isLargeScreen ? `translate(${mouseX}px, ${mouseY - 64}px)` : 'none'};">
+		<a href="#fotos" class="scroll" style="transform: translate({$coords.x}px, {$coords.y}px);">
 			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
 			Explore más abajo
-		</div>
-	</article>
-	<article class="p32 show" bind:this={show}>
-		<div class="left fcol">
+		</a>
+	</section>
+	<div id="fotos" class="large">
+		<section class="sticky p32">
 			<div class="text fcol">
 				<h1>Kombucha <span class="c0">G</span><span class="c1">a</span><span class="c2">u</span><span class="c3">d</span><span class="c4">í</span></h1>
-				<p>
-					Energía que <strong>sorprende</strong>. Naturalmente poderosa.
-					Vitalidad en cada sorbo.
-				</p>
-				<a href="/" class="btn">Descubra más</a>
+				<p>Naturalmente poderosa.</p>
+				<a href="https://gaudi.pe" target="_blank" class="btn">Descubra más</a>
 			</div>
-			<div class="slider">
-				<div class="slide">
-					<enhanced:img src={First} alt="some alt text" width="96" height="160"/>
-				</div>
-				<div class="slide">
-					<enhanced:img src={Secon} alt="some alt text" width="96" height="160"/>
-				</div>
-				<div class="slide">
-					<enhanced:img src={Third} alt="some alt text" width="96" height="160"/>
-				</div>
-				<div class="slide">
-					<enhanced:img src={Fourt} alt="some alt text" width="96" height="160"/>
-				</div>
-				<div class="slide">
-					<enhanced:img src={Fifth} alt="some alt text" width="96" height="160"/>
-				</div>
-			</div>	
-		</div>
-		<enhanced:img src={First} alt="some alt text" width="608" height="1080"/>
-	</article>
+			<div class="img">
+				<img src="https://i.makeagif.com/media/2-18-2017/QZuhsP.gif" alt="wasaa">
+			</div>
+		</section>
+	</div>
+	<Footer/>
 </main>
-<Footer/>
 
 <style>
 	main {
-		overflow-x: hidden;
+		height: 100vh; /* Altura completa para hacer el scroll */
+		overflow-y: scroll; /* Solo scroll vertical */
+		scroll-snap-type: y mandatory; /* Scroll snap activado verticalmente */
+		scroll-behavior: smooth;
+	}
+	main>* {
+		scroll-snap-align: start !important;
+	}
+	section {
+		min-height: 100vh;
 	}
 	h1 {
-		font-size: 72px;
+		font-size: 78px;
 		line-height: 1;
 	}
-	article {
-		min-height: 100dvh;
+	img {
+		border-radius: 32px;
+    width: 100%;
+		max-height: calc(100dvh - 64px);
+		aspect-ratio: 9 / 16;
 	}
 	p {
-		max-width: 800px;
-		line-height: 1.15;
-		font-size: 42px;
+		font-size: 48px;
 	}
-	span {
-		animation-duration: 2s;
-		animation-timing-function: linear;
-		animation-iteration-count: infinite;
-		animation-fill-mode: both;
+	.large {
+		min-height: 400dvh;
 	}
-	.show>*>:global(img) {
-		border-radius: 32px;
-		height: calc(100dvh - 148px);
-		width: auto;
-	}
-	.show>:global(picture), .show>*>:global(img) {
-		align-self: end;
-	}
-	article {
-		position: relative;
-	}
-	.slider {
+	.sticky {
+		position: sticky;
+		top: 0;
+
 		display: flex;
-		align-items: flex-end;
-    gap: 16px;
-		scrollbar-width: none;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
 	}
-	.slider::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Edge */
+	.text {
+		align-items: flex-start;
+		gap: 16px;
 	}
-	.slide {
-		border-radius: 16px;
-		transition: .2s ease-out;
-		flex-shrink: 0;
+	#welcome {
+		align-items: flex-start;
 	}
-	.slide>:global(picture), .slide :global(img) {
-		border-radius: 16px;
+	#welcome p {
+		max-width: max(28ch, 50vw);
 	}
-	.slide:hover {
-		transform: translateY(-32px);
-	}
-	.left {
-		gap: 64px;
-	}
-	.show {
-		/* position: sticky;
-		top: 0; */
-		display: grid;
-		gap: 32px;
-		grid-template-columns: 1fr auto;
-		align-items: flex-end;
+	#fotos .btn {
+		margin-top: 8px;
 	}
 	.scroll {
+		text-decoration: none;
+		color: inherit;
 		z-index: 2;
 		position: absolute;
 		top: 0;
@@ -177,21 +158,25 @@
 		border-radius: 32px;
 		border: 2px solid var(--text);
 		background: var(--klk);
-		backdrop-filter: blur(4px);
+		backdrop-filter: blur(2px);
 	}
-	.text {
-		gap: 24px;
-		align-items: flex-start;
-	}
-	@media (max-width: 900px) {
-		.show {
-			grid-template-columns: 1fr;
-			align-items: center;
-			color: var(--text);
-
+	@media (max-width: 1000px) {
+		h1 {
+			font-size: 48px;
+		}
+		p {
+			font-size: 36px;
+		}
+		img {
+			filter: brightness(0.75);
+			border-radius: 0;
+			max-height: unset;
+			height: 100dvh;
+		}
+		#fotos {
 			--bg: #1E1E1E;
 			--text: #EFEFEF;
-			--text-low: #A6A6A6;
+			--text-low: #939393;
 			--text-input: #1C1D20;
 			--shadow: #3c3c3c;
 			--red: #FF6C6C;
@@ -201,57 +186,25 @@
 			--blu: #70C4EE;
 			--vio: #ED99EC;
 			--klk: #1E1E1E80;
+
+			color: var(--text);
 		}
-		.show>:global(picture) {
+		#fotos .btn {
+			background: #1e1e1e30;
+			backdrop-filter: blur(8px);
+		}
+		#welcome {
+			align-items: unset;
+			gap: 24px;
+		}
+		.img {
 			position: absolute;
-    	inset: 0;
+			inset: 0;
 			z-index: -1;
 		}
-		.show>*>:global(img) {
-			width: 100%;
-			aspect-ratio: unset;
-			height: 100dvh;
-			border-radius: 0;
-			filter: brightness(0.75);
-		}
-		.slide :global(img){
-			width: auto;
-    	height: 120px;
-			border-radius: 12px;
-		}
-		.slider {
-			position: absolute;
-			left: 0;
-			bottom: 24px;
-			right: 0;
-			overflow-x: scroll;
-			width: 100vw;
-			padding: 0 24px;
-			gap: 12px;
-		}
-		.slide:hover {
-			transform: none;
-			margin-bottom: 32px;
-		}
-		.show .btn {
-			background: transparent;
-		}
-	}
-	@media (max-width: 700px) {
-		h1 {
-			font-size: 56px;
-		}
-		p {
-			font-size: 36px;
-		}
-		.text p {
-			font-size: 24px;
-		}
 		.scroll {
-			top: unset;
-			bottom: 24px;
-			left: 24px;
-			right: 24px;
+			transform: none !important;
+    	position: relative;
 		}
 	}
 </style>
