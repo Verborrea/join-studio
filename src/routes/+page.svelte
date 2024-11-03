@@ -21,15 +21,6 @@
 		handleScroll()
 	};
 
-	// Detectar si estamos debajo de 100vh
-	const checkScrollPosition = () => {
-		if (main.scrollY > window.innerHeight) {
-			contentText = "Has llegado abajo";
-		} else {
-			contentText = "Explore más abajo";
-		}
-	};
-
 	function handleScroll() {
 		const target = document.getElementById('fotos');
 		const footer = document.getElementById('footer');
@@ -97,7 +88,7 @@
 
 <style>
 	main {
-		height: 100vh; /* Altura completa para hacer el scroll */
+		height: 100dvh; /* Altura completa para hacer el scroll */
 		overflow-y: scroll; /* Solo scroll vertical */
 		scroll-snap-type: y mandatory; /* Scroll snap activado verticalmente */
 		scroll-behavior: smooth;
