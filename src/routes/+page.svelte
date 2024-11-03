@@ -9,14 +9,16 @@
 		damping: 0.3
 	});
 
-	let isDesktop = $state(true);
+	let isMobile = $state(false);
 	let contentText = $state("Explore más abajo");
-	let headerVisible = $state(false);
+	let whiteHeader = $state(false);
+	let headerInvisible = $state(false);
 	let main;
 
 	// Detectar si es desktop o mobile
 	const updateScreenSize = () => {
-		isDesktop = window.innerWidth > 1000; // Puedes ajustar el ancho de pantalla que define "desktop"
+		isMobile = window.innerWidth < 1000;
+		handleScroll()
 	};
 
 	// Detectar si estamos debajo de 100vh
@@ -30,20 +32,25 @@
 
 	function handleScroll() {
 		const target = document.getElementById('fotos');
-		if (!target) return;
+		const footer = document.getElementById('footer');
 
 		const { top, bottom } = target.getBoundingClientRect();
 
-		// Activa la clase solo cuando la parte superior de #fotos esté en la parte superior de la pantalla
-		// y se quita cuando la parte inferior del elemento pasa la parte superior de la pantalla
-		headerVisible = top <= 0 && bottom > 0;
+		if (isMobile) {
+			whiteHeader = top < 35;
+		} else {
+			whiteHeader = false
+		}
+
+		const { top: footer_top, bottom: footer_bottom } = target.getBoundingClientRect();
+		headerInvisible = footer_bottom < 35;
 	}
 
 	// Eventos de montaje
 	onMount(() => {
 		document.querySelector('main').addEventListener('scroll', handleScroll);
 		updateScreenSize();
-		if (!isDesktop) {
+		if (isMobile) {
 			coords.set({ x: 0, y: 0 });
 		}
 
@@ -54,14 +61,14 @@
 <svelte:window 
 	onresize={updateScreenSize}
 	onmousemove={(e) => {
-		if (isDesktop) {
+		if (!isMobile) {
 			coords.set({ x: e.clientX, y: e.clientY });
 		}
 	}}
 />
 
 <main bind:this={main}>
-	<Header {headerVisible}/>
+	<Header {whiteHeader} {headerInvisible}/>
 	<section id="welcome" class="fcol fcc p32">
 		<p>
 			Bienvenido a <strong>Join
@@ -99,7 +106,7 @@
 		scroll-snap-align: start !important;
 	}
 	section {
-		min-height: 100vh;
+		min-height: 100dvh;
 	}
 	h1 {
 		font-size: 78px;
@@ -108,11 +115,17 @@
 	img {
 		border-radius: 32px;
     width: 100%;
-		max-height: calc(100dvh - 64px);
+		max-height: calc(100dvh - 144px);
 		aspect-ratio: 9 / 16;
 	}
 	p {
 		font-size: 48px;
+	}
+	span {
+		animation-duration: 2s;
+		animation-timing-function: linear;
+		animation-iteration-count: infinite;
+		animation-fill-mode: both;
 	}
 	.large {
 		min-height: 400dvh;
@@ -135,6 +148,9 @@
 	}
 	#welcome p {
 		max-width: max(28ch, 50vw);
+	}
+	.img {
+		align-self: flex-end;
 	}
 	#fotos .btn {
 		margin-top: 8px;
@@ -205,6 +221,7 @@
 		.scroll {
 			transform: none !important;
     	position: relative;
+			z-index: unset;
 		}
 	}
 </style>
