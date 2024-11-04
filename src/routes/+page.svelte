@@ -40,6 +40,7 @@
 	let whiteHeader = $state(false);
 	let headerInvisible = $state(false);
 	let index = $state(0);
+	let scrollPercentage = $state(0);
 	let preloadedImages = [];
 
 	function preloadImages(urls) {
@@ -50,6 +51,7 @@
 		});
 	}
 
+	let slider;
 	let main;
 	let fotos;
 	let stickyElement;
@@ -58,6 +60,21 @@
 		isMobile = window.innerWidth < 1000;
 		handleScroll()
 	};
+
+	function formaPico(x) {
+		// Define el rango de la función
+		const maxX = 100; // Puedes ajustar esto al rango deseado
+		const peakX = maxX / 2; // La posición del pico en el medio
+
+		// Comprobar el valor de x para determinar el comportamiento
+		if (x < 0 || x > maxX) {
+				return 0; // Fuera de rango
+		} else if (x <= peakX) {
+				return x / peakX; // Ascendente
+		} else {
+				return (maxX - x) / peakX; // Descendente
+		}
+	}
 
 	function handleScroll() {
 		const { top } = fotos.getBoundingClientRect();
@@ -78,12 +95,14 @@
 		const totalScrollableDistance = fotos.offsetHeight - stickyElement.offsetHeight;
 
 		// Calcular porcentaje de desplazamiento
-		let scrollPercentage = (distanceScrolled / totalScrollableDistance) * 100;
+		scrollPercentage = (distanceScrolled / totalScrollableDistance) * 100;
 		scrollPercentage = Math.min(Math.max(scrollPercentage, 0), 100); // Limitar a un rango de 0-100%
 
 		// Cambia el valor de index según el porcentaje y el tamaño de products
 		const sectionSize = 100 / products.length;
 		index = Math.min(Math.floor(scrollPercentage / sectionSize), products.length - 1);
+
+		slider.scroll(scrollPercentage * window.innerWidth / 100, 0);
 	}
 
 	onMount(() => {
@@ -124,11 +143,17 @@
 		<section class="sticky p32" bind:this={stickyElement}>
 			<div class="text fcol">
 				<h1>{@html products[index].title}</h1>
-				<p>{products[index].slogan}</p>
+				<p>{formaPico(scrollPercentage).toFixed(2)}</p>
 				<a href={products[index].href} target="_blank" class="btn">Descubra más</a>
 			</div>
 			<div class="img">
 				<img src={products[index].src} alt="wasaa">
+			</div>
+			<div class="slider fc" bind:this={slider}>
+				<img src="https://i.makeagif.com/media/2-18-2017/QZuhsP.gif" alt="Hola">
+				<img src="https://media.tenor.com/V6HSI8BqbEMAAAAM/drink-jack-daniels.gif" alt="Hola">
+				<img src="https://forums.au.reachout.com/t5/image/serverpage/image-id/6855i130573764081B94B/image-size/large?v=1.0&px=999" alt="Hola">
+				<img src="https://media0.giphy.com/media/aZcwYGaPOGJsLeLFfC/giphy.gif?cid=6c09b952n84t4v66nuz2imp6fear36rkrfsu14xgcalq0bca&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=g" alt="Hola">
 			</div>
 		</section>
 	</div>
@@ -152,12 +177,6 @@
 		font-size: 78px;
 		line-height: 1;
 	}
-	img {
-		border-radius: 32px;
-    width: 100%;
-    height: calc(100dvh - 144px);
-    aspect-ratio: 9 / 16;
-	}
 	p {
 		font-size: 48px;
 	}
@@ -166,6 +185,17 @@
 		animation-timing-function: linear;
 		animation-iteration-count: infinite;
 		animation-fill-mode: both;
+	}
+	.img img {
+		border-radius: 32px;
+		width: 100%;
+		height: calc(100dvh - 144px);
+		aspect-ratio: 9 / 16;
+	}
+	.slider img {
+		height: 160px;
+		width: 90px;
+		border-radius: 12px;
 	}
 	.large {
 		min-height: 400dvh;
@@ -183,14 +213,23 @@
 		align-items: flex-start;
 		gap: 16px;
 	}
+	.img {
+		align-self: flex-end;
+	}
+	.slider {
+		gap: 16px;
+		position: absolute;
+		width: 100vw;
+		padding: 24px;
+		bottom: 0;
+		white-space: nowrap;
+		overflow-x: scroll;
+	}
 	#welcome {
 		align-items: flex-start;
 	}
 	#welcome p {
 		max-width: max(28ch, 50vw);
-	}
-	.img {
-		align-self: flex-end;
 	}
 	#fotos .btn {
 		margin-top: 8px;
@@ -223,7 +262,7 @@
 		p {
 			font-size: 36px;
 		}
-		img {
+		.img img {
 			filter: brightness(0.75);
 			border-radius: 0;
 			max-height: unset;
@@ -265,6 +304,9 @@
 		}
 		.sticky {
 			grid-template-columns: 1fr;
+		}
+		.slider {
+			padding: 24px 50%;
 		}
 	}
 </style>
