@@ -56,11 +56,11 @@ body.dark {
 	}
 }
 
-img, svg {
+video, img, svg {
 	display: block;
 }
 
-img {
+video, img {
 	object-fit: cover;
 }
 

@@ -56,3 +56,35 @@
 	.g32 { gap: 24px }
 	.p32 { padding: 24px }
 }
+
+@keyframes help {
+	from {
+		scale: 1.25;
+		transform: translateX(-25%);
+		opacity: 0;
+	} to {
+		scale: 1;
+		transform: translateX(0);
+		opacity: 1;
+	}
+}
+@keyframes smalltime {
+	0% {
+		transform: scale(0.01);
+		opacity: 0;
+	}
+	100% {
+		transform: scale(0.1);
+		opacity: 1;
+	}
+}
+@keyframes bigtime {
+	0% {
+		/* line-height: 1; */
+		transform: scale(0.1);
+	}
+	100% {
+		/* line-height: 0.5; */
+		transform: scale(10);
+	}
+}

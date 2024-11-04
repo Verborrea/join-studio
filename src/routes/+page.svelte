@@ -1,33 +1,25 @@
 <script>
+	import Intro from './Intro.svelte';
 	import Header from './Header.svelte';
 	import Footer from './Footer.svelte';
 	import { onMount } from 'svelte';
 	import { spring } from 'svelte/motion';
+
+	import kombucha from '$lib/images/kombucha.avif';
+	import don_luciano from '$lib/images/don_luciano.avif';
 
 	const products = [
 		{
 			title: 'Kombucha Gaudí',
 			slogan: 'Naturalmente poderosa.',
 			href: 'https://gaudi.pe',
-			src: 'https://i.makeagif.com/media/2-18-2017/QZuhsP.gif'
+			src: '/videos/compilado.mp4'
 		},
 		{
 			title: 'Don Luciano',
 			slogan: 'Licores que seducen.',
 			href: 'https://gaudi.pe',
-			src: 'https://media.tenor.com/V6HSI8BqbEMAAAAM/drink-jack-daniels.gif'
-		},
-		{
-			title: 'Casa Shanti',
-			slogan: 'Bienestar y sabores únicos',
-			href: 'https://gaudi.pe',
-			src: 'https://forums.au.reachout.com/t5/image/serverpage/image-id/6855i130573764081B94B/image-size/large?v=1.0&px=999'
-		},
-		{
-			title: 'Inmobiliria M. Luján',
-			slogan: 'El sueño de tu hogar es sencillo',
-			href: 'https://gaudi.pe',
-			src: 'https://media0.giphy.com/media/aZcwYGaPOGJsLeLFfC/giphy.gif?cid=6c09b952n84t4v66nuz2imp6fear36rkrfsu14xgcalq0bca&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=g'
+			src: '/videos/trago.mp4'
 		}
 	]
 
@@ -36,6 +28,7 @@
 		damping: 0.3
 	});
 
+	let show = $state(false);
 	let isMobile = $state(false);
 	let whiteHeader = $state(false);
 	let headerInvisible = $state(false);
@@ -55,6 +48,19 @@
 	let main;
 	let fotos;
 	let stickyElement;
+
+	function showPage() {
+		show = true
+
+		setTimeout(() => {
+			main.addEventListener('scroll', handleScroll);
+			updateScreenSize();
+			if (isMobile) {
+				coords.set({ x: 0, y: 0 });
+			}
+			preloadImages(products.map(p => p.src));
+		}, 1000)
+	}
 
 	function updateScreenSize() {
 		isMobile = window.innerWidth < 1000;
@@ -106,12 +112,12 @@
 	}
 
 	onMount(() => {
-		main.addEventListener('scroll', handleScroll);
-		updateScreenSize();
-		if (isMobile) {
-			coords.set({ x: 0, y: 0 });
-		}
-		preloadImages(products.map(p => p.src));
+		// main.addEventListener('scroll', handleScroll);
+		// updateScreenSize();
+		// if (isMobile) {
+		// 	coords.set({ x: 0, y: 0 });
+		// }
+		// preloadImages(products.map(p => p.src));
 
 		return () => window.removeEventListener('scroll', handleScroll);
 	});
@@ -126,6 +132,7 @@
 	}}
 />
 
+{#if show}
 <main bind:this={main}>
 	<Header {whiteHeader} {headerInvisible}/>
 	<section id="welcome" class="fcol fcc p32">
@@ -142,23 +149,26 @@
 	<div id="fotos" class="large" bind:this={fotos}>
 		<section class="sticky p32" bind:this={stickyElement}>
 			<div class="text fcol">
-				<h1>{@html products[index].title}</h1>
-				<p>{formaPico(scrollPercentage).toFixed(2)}</p>
-				<a href={products[index].href} target="_blank" class="btn">Descubra más</a>
+				<h1>{products[index].title}</h1>
+				<p>{products[index].slogan}</p>
+				<!-- <a href={products[index].href} target="_blank" class="btn">Descubra más</a> -->
 			</div>
 			<div class="img">
-				<img src={products[index].src} alt="wasaa">
+				<video src={products[index].src} autoplay muted loop>
+					Tu navegador no admite el elemento <code>video</code>.
+				</video>
 			</div>
 			<div class="slider fc" bind:this={slider}>
-				<img src="https://i.makeagif.com/media/2-18-2017/QZuhsP.gif" alt="Hola">
-				<img src="https://media.tenor.com/V6HSI8BqbEMAAAAM/drink-jack-daniels.gif" alt="Hola">
-				<img src="https://forums.au.reachout.com/t5/image/serverpage/image-id/6855i130573764081B94B/image-size/large?v=1.0&px=999" alt="Hola">
-				<img src="https://media0.giphy.com/media/aZcwYGaPOGJsLeLFfC/giphy.gif?cid=6c09b952n84t4v66nuz2imp6fear36rkrfsu14xgcalq0bca&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=g" alt="Hola">
+				<img src={kombucha} alt="Hola">
+				<img src={don_luciano} alt="Hola">
 			</div>
 		</section>
 	</div>
 	<Footer/>
 </main>
+{:else}
+<Intro on:ready={showPage}/>
+{/if}
 
 <style>
 	main {
@@ -186,7 +196,7 @@
 		animation-iteration-count: infinite;
 		animation-fill-mode: both;
 	}
-	.img img {
+	.img video {
 		border-radius: 32px;
 		width: 100%;
 		height: calc(100dvh - 144px);
@@ -198,7 +208,7 @@
 		border-radius: 12px;
 	}
 	.large {
-		min-height: 400dvh;
+		min-height: 200dvh;
 	}
 	.sticky {
 		position: sticky;
@@ -231,9 +241,9 @@
 	#welcome p {
 		max-width: max(28ch, 50vw);
 	}
-	#fotos .btn {
+	/* #fotos .btn {
 		margin-top: 8px;
-	}
+	} */
 	.scroll {
 		text-decoration: none;
 		color: inherit;
@@ -262,7 +272,7 @@
 		p {
 			font-size: 36px;
 		}
-		.img img {
+		.img video {
 			filter: brightness(0.75);
 			border-radius: 0;
 			max-height: unset;
@@ -284,10 +294,10 @@
 
 			color: var(--text);
 		}
-		#fotos .btn {
+		/* #fotos .btn {
 			background: #1e1e1e30;
 			backdrop-filter: blur(8px);
-		}
+		} */
 		#welcome {
 			align-items: unset;
 			gap: 24px;

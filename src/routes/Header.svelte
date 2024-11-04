@@ -48,7 +48,7 @@
 </script>
 
 <header class="fc between g32 p32" class:whiteHeader class:headerInvisible>
-	<a href="/" id="title" class="title">Join Studio</a>
+	<a href="/" id="title" class="title" class:active>Join Studio</a>
 	<nav id="nav" class="do fc g32">
 		<a href="/">Talento</a>
 		<a href="/">Trabajo</a>
@@ -96,7 +96,7 @@
 		</nav>
 		<a href="https://wa.me/51910880595?text=Hola!" target="_blank" class="btn">Hablemos</a>
 	</article>
-	<button id="menu" class="menubtn mo" type="button" onclick={() => {
+	<button id="menu" class="menubtn mo" type="button" class:active onclick={() => {
 		active = !active
 	}}>
 		{active ? 'cerrar' : 'menú'}
@@ -123,12 +123,15 @@
 	.headerInvisible {
 		display: none;
 	}
-	#menu {
+	#menu, #title {
 		position: relative;
 		z-index: 1;
 	}
 	.whiteHeader #title, .whiteHeader #menu {
 		color: #EFEFEF;
+	}
+	.whiteHeader #title.active, .whiteHeader #menu.active {
+		color: var(--text);
 	}
 	@media (max-width: 1000px) {
 		.do {
