@@ -13,13 +13,13 @@
 			title: 'Kombucha Gaudí',
 			slogan: 'Naturalmente poderosa.',
 			href: 'https://gaudi.pe',
-			src: '/videos/compilado.mp4'
+			src: '/videos/gaudi.webm'
 		},
 		{
 			title: 'Don Luciano',
 			slogan: 'Licores que seducen.',
 			href: 'https://gaudi.pe',
-			src: '/videos/trago.mp4'
+			src: '/videos/donlu.webm'
 		}
 	]
 
@@ -63,8 +63,10 @@
 	}
 
 	function updateScreenSize() {
-		isMobile = window.innerWidth < 1000;
-		handleScroll()
+		if (show) {
+			isMobile = window.innerWidth < 1000;
+			handleScroll()
+		}
 	};
 
 	function formaPico(x) {
