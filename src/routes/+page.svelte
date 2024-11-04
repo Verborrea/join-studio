@@ -40,6 +40,15 @@
 	let whiteHeader = $state(false);
 	let headerInvisible = $state(false);
 	let index = $state(0);
+	let preloadedImages = [];
+
+	function preloadImages(urls) {
+		urls.forEach((url) => {
+			const img = new Image();
+			img.src = url;
+			preloadedImages.push(img);
+		});
+	}
 
 	let main;
 	let fotos;
@@ -83,6 +92,7 @@
 		if (isMobile) {
 			coords.set({ x: 0, y: 0 });
 		}
+		preloadImages(products.map(p => p.src));
 
 		return () => window.removeEventListener('scroll', handleScroll);
 	});
