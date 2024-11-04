@@ -1,5 +1,15 @@
 <script>
 	let msg = $state('')
+
+	function sendMsg() {
+		const phoneNumber = '910880595';
+		const encodedMessage = encodeURIComponent(msg);
+		const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+		// Abre la URL en una nueva pestaña
+		window.open(whatsappUrl, '_blank');
+		msg = ''
+	}
 </script>
 
 <section id="footer">
@@ -26,7 +36,9 @@
 			</div>
 			<div class="input fc">
 				<input type="text" placeholder="Tu mensaje" bind:value={msg}>
-				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-input)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-forward"><polyline points="15 17 20 12 15 7"/><path d="M4 18v-2a4 4 0 0 1 4-4h12"/></svg>
+				<button type="submit" aria-label="Enviar" title="Enviar">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-input)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-forward"><polyline points="15 17 20 12 15 7"/><path d="M4 18v-2a4 4 0 0 1 4-4h12"/></svg>
+				</button>
 			</div>
 		</form>
 		<div class="info p32 between">
@@ -84,7 +96,6 @@
 		display: flex;
 		justify-content: space-between;
 		flex-direction: column;
-		gap: 1em;
 	}
 	form {
 		gap: 16px;
@@ -130,12 +141,15 @@
 			flex-direction: column;
 			gap: 24px;
 		}
-		.info nav {
-			padding-right: 0;
-		}
 		.navs {
 			width: 100%;
 			justify-content: space-between;
+		}
+		.info {
+			padding: 0 24px;
+		}
+		.info nav {
+			padding-right: 0;
 		}
 		h1 {
 			font-size: 12vw;

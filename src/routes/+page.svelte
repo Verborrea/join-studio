@@ -4,28 +4,54 @@
 	import { onMount } from 'svelte';
 	import { spring } from 'svelte/motion';
 
+	const products = [
+		{
+			title: 'Kombucha Gaudí',
+			slogan: 'Naturalmente poderosa.',
+			href: 'https://gaudi.pe',
+			src: 'https://i.makeagif.com/media/2-18-2017/QZuhsP.gif'
+		},
+		{
+			title: 'Don Luciano',
+			slogan: 'Licores que seducen.',
+			href: 'https://gaudi.pe',
+			src: 'https://media.tenor.com/V6HSI8BqbEMAAAAM/drink-jack-daniels.gif'
+		},
+		{
+			title: 'Casa Shanti',
+			slogan: 'Bienestar y sabores únicos',
+			href: 'https://gaudi.pe',
+			src: 'https://forums.au.reachout.com/t5/image/serverpage/image-id/6855i130573764081B94B/image-size/large?v=1.0&px=999'
+		},
+		{
+			title: 'Inmobiliria M. Luján',
+			slogan: 'El sueño de tu hogar es sencillo',
+			href: 'https://gaudi.pe',
+			src: 'https://media0.giphy.com/media/aZcwYGaPOGJsLeLFfC/giphy.gif?cid=6c09b952n84t4v66nuz2imp6fear36rkrfsu14xgcalq0bca&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=g'
+		}
+	]
+
 	let coords = spring({ x: 300, y: 200 }, {
 		stiffness: 0.08,
 		damping: 0.3
 	});
 
 	let isMobile = $state(false);
-	let contentText = $state("Explore más abajo");
 	let whiteHeader = $state(false);
 	let headerInvisible = $state(false);
-	let main;
+	let index = $state(0);
 
-	// Detectar si es desktop o mobile
-	const updateScreenSize = () => {
+	let main;
+	let fotos;
+	let stickyElement;
+
+	function updateScreenSize() {
 		isMobile = window.innerWidth < 1000;
 		handleScroll()
 	};
 
 	function handleScroll() {
-		const target = document.getElementById('fotos');
-		const footer = document.getElementById('footer');
-
-		const { top, bottom } = target.getBoundingClientRect();
+		const { top } = fotos.getBoundingClientRect();
 
 		if (isMobile) {
 			whiteHeader = top < 35;
@@ -33,13 +59,26 @@
 			whiteHeader = false
 		}
 
-		const { top: footer_top, bottom: footer_bottom } = target.getBoundingClientRect();
+		const { bottom: footer_bottom } = fotos.getBoundingClientRect();
 		headerInvisible = footer_bottom < 35;
+
+		// Lógica de desplazamiento para cambiar el índice 'index' según el tamaño de products
+		const parentRect = fotos.getBoundingClientRect();
+
+		const distanceScrolled = parentRect.top * -1;
+		const totalScrollableDistance = fotos.offsetHeight - stickyElement.offsetHeight;
+
+		// Calcular porcentaje de desplazamiento
+		let scrollPercentage = (distanceScrolled / totalScrollableDistance) * 100;
+		scrollPercentage = Math.min(Math.max(scrollPercentage, 0), 100); // Limitar a un rango de 0-100%
+
+		// Cambia el valor de index según el porcentaje y el tamaño de products
+		const sectionSize = 100 / products.length;
+		index = Math.min(Math.floor(scrollPercentage / sectionSize), products.length - 1);
 	}
 
-	// Eventos de montaje
 	onMount(() => {
-		document.querySelector('main').addEventListener('scroll', handleScroll);
+		main.addEventListener('scroll', handleScroll);
 		updateScreenSize();
 		if (isMobile) {
 			coords.set({ x: 0, y: 0 });
@@ -71,15 +110,15 @@
 			Explore más abajo
 		</a>
 	</section>
-	<div id="fotos" class="large">
-		<section class="sticky p32">
+	<div id="fotos" class="large" bind:this={fotos}>
+		<section class="sticky p32" bind:this={stickyElement}>
 			<div class="text fcol">
-				<h1>Kombucha <span class="c0">G</span><span class="c1">a</span><span class="c2">u</span><span class="c3">d</span><span class="c4">í</span></h1>
-				<p>Naturalmente poderosa.</p>
-				<a href="https://gaudi.pe" target="_blank" class="btn">Descubra más</a>
+				<h1>{@html products[index].title}</h1>
+				<p>{products[index].slogan}</p>
+				<a href={products[index].href} target="_blank" class="btn">Descubra más</a>
 			</div>
 			<div class="img">
-				<img src="https://i.makeagif.com/media/2-18-2017/QZuhsP.gif" alt="wasaa">
+				<img src={products[index].src} alt="wasaa">
 			</div>
 		</section>
 	</div>
@@ -88,9 +127,9 @@
 
 <style>
 	main {
-		height: 100dvh; /* Altura completa para hacer el scroll */
-		overflow-y: scroll; /* Solo scroll vertical */
-		scroll-snap-type: y mandatory; /* Scroll snap activado verticalmente */
+		height: 100dvh;
+		overflow-y: scroll;
+		scroll-snap-type: y mandatory;
 		scroll-behavior: smooth;
 	}
 	main>* {
@@ -106,8 +145,8 @@
 	img {
 		border-radius: 32px;
     width: 100%;
-		max-height: calc(100dvh - 144px);
-		aspect-ratio: 9 / 16;
+    height: calc(100dvh - 144px);
+    aspect-ratio: 9 / 16;
 	}
 	p {
 		font-size: 48px;
@@ -125,9 +164,9 @@
 		position: sticky;
 		top: 0;
 
-		display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr auto;
+		align-items: center;
     gap: 32px;
 	}
 	.text {
@@ -213,6 +252,9 @@
 			transform: none !important;
     	position: relative;
 			z-index: unset;
+		}
+		.sticky {
+			grid-template-columns: 1fr;
 		}
 	}
 </style>
