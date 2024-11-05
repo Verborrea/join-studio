@@ -7,6 +7,9 @@
 
 	import kombucha from '$lib/images/kombucha.avif';
 	import don_luciano from '$lib/images/don_luciano.avif';
+	import ema from '$lib/images/ema.avif';
+	import lujan from '$lib/images/lujan.avif';
+	import shanti from '$lib/images/shanti.avif';
 
 	const products = [
 		{
@@ -20,8 +23,28 @@
 			slogan: 'Licores que seducen.',
 			href: 'https://gaudi.pe',
 			src: '/videos/donlu.webm'
+		},
+		{
+			title: 'Emanuel Rivera',
+			slogan: 'Melodias que conectan.',
+			href: 'https://gaudi.pe',
+			src: '/videos/rivera.webm'
+		},
+		{
+			title: 'Inmobiliria M Lujan',
+			slogan: 'La casa de tus sueños.',
+			href: 'https://gaudi.pe',
+			src: '/videos/lujan.webm'
+		},
+		{
+			title: 'Casa Shanti',
+			slogan: 'Bienestar y sabores únicos.',
+			href: 'https://gaudi.pe',
+			src: '/videos/shanti.webm'
 		}
 	]
+
+	const preloadedImages = [kombucha, don_luciano, ema, lujan, shanti];
 
 	let coords = spring({ x: 300, y: 200 }, {
 		stiffness: 0.08,
@@ -34,20 +57,9 @@
 	let headerInvisible = $state(false);
 	let index = $state(0);
 	let scrollPercentage = $state(0);
-	let preloadedImages = [];
+	let text = $state('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg> Explore más abajo');
 
-	function preloadImages(urls) {
-		urls.forEach((url) => {
-			const img = new Image();
-			img.src = url;
-			preloadedImages.push(img);
-		});
-	}
-
-	let slider;
-	let main;
-	let fotos;
-	let stickyElement;
+	let slider, main, fotos, stickyElement;
 
 	function showPage() {
 		show = true
@@ -58,7 +70,6 @@
 			if (isMobile) {
 				coords.set({ x: 0, y: 0 });
 			}
-			preloadImages(products.map(p => p.src));
 		}, 1000)
 	}
 
@@ -90,6 +101,7 @@
 		if (isMobile) {
 			whiteHeader = top < 35;
 		} else {
+			text = top < 35 ? '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>Ver más' : '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>Explore más abajo'
 			whiteHeader = false
 		}
 
@@ -115,11 +127,10 @@
 
 	onMount(() => {
 		// main.addEventListener('scroll', handleScroll);
-		// updateScreenSize();
-		// if (isMobile) {
-		// 	coords.set({ x: 0, y: 0 });
-		// }
-		// preloadImages(products.map(p => p.src));
+		// 	updateScreenSize();
+		// 	if (isMobile) {
+		// 		coords.set({ x: 0, y: 0 });
+		// 	}
 
 		return () => window.removeEventListener('scroll', handleScroll);
 	});
@@ -143,16 +154,18 @@
 			<span class="c0">S</span><span class="c1">t</span><span class="c2">u</span><span class="c3">d</span><span class="c4">i</span><span class="c5">o</span></strong>,
 			una agencia creativa donde hacemos contenido de calidad especializado en tí.
 		</p>
+		{#if !headerInvisible}
 		<a href="#fotos" class="scroll" style="transform: translate({$coords.x}px, {$coords.y}px);">
-			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
-			Explore más abajo
+			{@html text}
 		</a>
+		{/if}
 	</section>
 	<div id="fotos" class="large" bind:this={fotos}>
 		<section class="sticky p32" bind:this={stickyElement}>
 			<div class="text fcol">
 				<h1>{products[index].title}</h1>
-				<p>{products[index].slogan}</p>
+				<h1>{products[index].slogan}</h1>
+				<!-- <p>{(scrollPercentage * 5 % 100).toFixed(0)}</p> -->
 				<!-- <a href={products[index].href} target="_blank" class="btn">Descubra más</a> -->
 			</div>
 			<div class="img">
@@ -161,8 +174,9 @@
 				</video>
 			</div>
 			<div class="slider fc" bind:this={slider}>
-				<img src={kombucha} alt="Hola">
-				<img src={don_luciano} alt="Hola">
+				{#each preloadedImages as img, idx}
+					<img class:active={idx === Math.floor(scrollPercentage / 20)} src={img} alt="Hola">
+				{/each}
 			</div>
 		</section>
 	</div>
@@ -210,7 +224,7 @@
 		border-radius: 12px;
 	}
 	.large {
-		min-height: 200dvh;
+		min-height: 500dvh;
 	}
 	.sticky {
 		position: sticky;
@@ -275,7 +289,7 @@
 			font-size: 36px;
 		}
 		.img video {
-			filter: brightness(0.75);
+			filter: brightness(0.6);
 			border-radius: 0;
 			max-height: unset;
 			height: 100dvh;
