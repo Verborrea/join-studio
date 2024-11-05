@@ -51,7 +51,7 @@
 		damping: 0.3
 	});
 
-	let show = $state(false);
+	let show = $state(true);
 	let isMobile = $state(false);
 	let whiteHeader = $state(false);
 	let headerInvisible = $state(false);
@@ -59,7 +59,7 @@
 	let scrollPercentage = $state(0);
 	let text = $state('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg> Explore más abajo');
 
-	let slider, main, fotos, stickyElement;
+	let slider, main, fotos, stickyElement, video_container;
 
 	function showPage() {
 		show = true
@@ -81,18 +81,7 @@
 	};
 
 	function formaPico(x) {
-		// Define el rango de la función
-		const maxX = 100; // Puedes ajustar esto al rango deseado
-		const peakX = maxX / 2; // La posición del pico en el medio
-
-		// Comprobar el valor de x para determinar el comportamiento
-		if (x < 0 || x > maxX) {
-				return 0; // Fuera de rango
-		} else if (x <= peakX) {
-				return x / peakX; // Ascendente
-		} else {
-				return (maxX - x) / peakX; // Descendente
-		}
+		return -Math.abs(((48 * x) / 100) - 24) + 24;
 	}
 
 	function handleScroll() {
@@ -125,12 +114,16 @@
 		slider.scroll(scrollPercentage * window.innerWidth / 100, 0);
 	}
 
+	$effect(() => {
+		video_container.children[index].currentTime = 0;
+	})
+
 	onMount(() => {
-		// main.addEventListener('scroll', handleScroll);
-		// 	updateScreenSize();
-		// 	if (isMobile) {
-		// 		coords.set({ x: 0, y: 0 });
-		// 	}
+		main.addEventListener('scroll', handleScroll);
+		updateScreenSize();
+		if (isMobile) {
+			coords.set({ x: 0, y: 0 });
+		}
 
 		return () => window.removeEventListener('scroll', handleScroll);
 	});
@@ -145,7 +138,7 @@
 	}}
 />
 
-{#if show}
+<!-- {#if show} -->
 <main bind:this={main}>
 	<Header {whiteHeader} {headerInvisible}/>
 	<section id="welcome" class="fcol fcc p32">
@@ -164,27 +157,28 @@
 		<section class="sticky p32" bind:this={stickyElement}>
 			<div class="text fcol">
 				<h1>{products[index].title}</h1>
-				<h1>{products[index].slogan}</h1>
-				<!-- <p>{(scrollPercentage * 5 % 100).toFixed(0)}</p> -->
+				<p>{products[index].slogan}</p>
 				<!-- <a href={products[index].href} target="_blank" class="btn">Descubra más</a> -->
 			</div>
-			<div class="img">
-				<video src={products[index].src} autoplay muted loop>
-					Tu navegador no admite el elemento <code>video</code>.
-				</video>
+			<div class="img" bind:this={video_container}>
+				{#each products as product, idx}
+					<video class:active={idx === index} src={product.src} autoplay muted loop>
+						Tu navegador no admite el elemento <code>video</code>.
+					</video>
+				{/each}
 			</div>
 			<div class="slider fc" bind:this={slider}>
 				{#each preloadedImages as img, idx}
-					<img class:active={idx === Math.floor(scrollPercentage / 20)} src={img} alt="Hola">
+					<img src={img} alt="Hola" style="transform: translateY(-{idx === index ? formaPico(scrollPercentage * 5 % 100) : 0}px);">
 				{/each}
 			</div>
 		</section>
 	</div>
 	<Footer/>
 </main>
-{:else}
+<!-- {:else}
 <Intro on:ready={showPage}/>
-{/if}
+{/if} -->
 
 <style>
 	main {
@@ -212,11 +206,16 @@
 		animation-iteration-count: infinite;
 		animation-fill-mode: both;
 	}
-	.img video {
+	video {
 		border-radius: 32px;
 		width: 100%;
 		height: calc(100dvh - 144px);
 		aspect-ratio: 9 / 16;
+		position: absolute;
+		inset: 0;
+	}
+	video.active {
+		z-index: 1;
 	}
 	.slider img {
 		height: 160px;
@@ -241,6 +240,9 @@
 	}
 	.img {
 		align-self: flex-end;
+		height: calc(100dvh - 144px);
+    aspect-ratio: 9 / 16;
+    position: relative;
 	}
 	.slider {
 		gap: 16px;
@@ -322,6 +324,8 @@
 			position: absolute;
 			inset: 0;
 			z-index: -1;
+			aspect-ratio: unset;
+			height: 100%;
 		}
 		.scroll {
 			transform: none !important;
