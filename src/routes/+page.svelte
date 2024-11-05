@@ -51,7 +51,7 @@
 		damping: 0.3
 	});
 
-	let show = $state(true);
+	let show = $state(false);
 	let isMobile = $state(false);
 	let whiteHeader = $state(false);
 	let headerInvisible = $state(false);
@@ -82,11 +82,6 @@
 
 	function formaPico(x) {
 		return 24*Math.sin(Math.PI * x / 100);
-	}
-
-	function cubic(x) {
-		return x
-		// return Math.abs(2 * Math.pow(((x)/(100))-1, 3) + 1);
 	}
 
 	function handleScroll() {
@@ -124,11 +119,11 @@
 	})
 
 	onMount(() => {
-		main.addEventListener('scroll', handleScroll);
-		updateScreenSize();
-		if (isMobile) {
-			coords.set({ x: 0, y: 0 });
-		}
+		// main.addEventListener('scroll', handleScroll);
+		// updateScreenSize();
+		// if (isMobile) {
+		// 	coords.set({ x: 0, y: 0 });
+		// }
 
 		return () => window.removeEventListener('scroll', handleScroll);
 	});
@@ -143,7 +138,7 @@
 	}}
 />
 
-<!-- {#if show} -->
+{#if show}
 <main bind:this={main}>
 	<Header {whiteHeader} {headerInvisible}/>
 	<section id="welcome" class="fcol fcc p32">
@@ -153,16 +148,21 @@
 			una agencia creativa donde hacemos contenido de calidad especializado en tí.
 		</p>
 		{#if !headerInvisible}
-		<a href="#fotos" class="scroll" style="transform: translate({$coords.x}px, {$coords.y}px);">
+		<button type="button" class="scroll" onclick={() => {
+			main.scrollBy({
+				top: window.innerHeight,
+				behavior: "smooth"
+			});
+		}} style="transform: translate({$coords.x}px, {$coords.y}px);">
 			{@html text}
-		</a>
+		</button>
 		{/if}
 	</section>
 	<div id="fotos" class="large" bind:this={fotos}>
 		<section class="sticky p32" bind:this={stickyElement}>
 			<div class="text fcol" style="
 				opacity: {formaPico(scrollPercentage * 5 % 100) / 24 + 0.2};
-				scale: {cubic(scrollPercentage * 5 % 100) / 50}
+				scale: {(scrollPercentage * 5 % 100) / 50}
 			">
 				<h1>{products[index].title}</h1>
 				<p>{products[index].slogan}</p>
@@ -193,9 +193,9 @@
 	</div>
 	<Footer/>
 </main>
-<!-- {:else}
+{:else}
 <Intro on:ready={showPage}/>
-{/if} -->
+{/if}
 
 <style>
 	main {
