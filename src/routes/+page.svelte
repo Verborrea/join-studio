@@ -81,7 +81,12 @@
 	};
 
 	function formaPico(x) {
-		return -Math.abs(((48 * x) / 100) - 24) + 24;
+		return 24*Math.sin(Math.PI * x / 100);
+	}
+
+	function cubic(x) {
+		return x
+		// return Math.abs(2 * Math.pow(((x)/(100))-1, 3) + 1);
 	}
 
 	function handleScroll() {
@@ -155,7 +160,10 @@
 	</section>
 	<div id="fotos" class="large" bind:this={fotos}>
 		<section class="sticky p32" bind:this={stickyElement}>
-			<div class="text fcol">
+			<div class="text fcol" style="
+				opacity: {formaPico(scrollPercentage * 5 % 100) / 24 + 0.2};
+				scale: {cubic(scrollPercentage * 5 % 100) / 50}
+			">
 				<h1>{products[index].title}</h1>
 				<p>{products[index].slogan}</p>
 				<!-- <a href={products[index].href} target="_blank" class="btn">Descubra más</a> -->
@@ -169,7 +177,16 @@
 			</div>
 			<div class="slider fc" bind:this={slider}>
 				{#each preloadedImages as img, idx}
-					<img src={img} alt="Hola" style="transform: translateY(-{idx === index ? formaPico(scrollPercentage * 5 % 100) : 0}px);">
+					<button
+						onclick={() => {
+							index = idx;
+							scrollPercentage = index / products.length * 100 + (50 / products.length);
+							slider.scroll({left: scrollPercentage * window.innerWidth / 100, behavior: "smooth"});
+						}}
+						type="button"
+						style="transform: translateY(-{idx === index ? formaPico(scrollPercentage * 5 % 100) : 0}px);">
+						<img src={img} alt="Hola">
+					</button>
 				{/each}
 			</div>
 		</section>
@@ -223,7 +240,7 @@
 		border-radius: 12px;
 	}
 	.large {
-		min-height: 500dvh;
+		min-height: 400dvh;
 	}
 	.sticky {
 		position: sticky;
