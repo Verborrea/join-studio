@@ -2,9 +2,8 @@
 	let msg = $state('')
 
 	function sendMsg() {
-		const phoneNumber = '910880595';
 		const encodedMessage = encodeURIComponent(msg);
-		const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+		const whatsappUrl = `https://wa.me/+51910880595?text=${encodedMessage}`;
 
 		// Abre la URL en una nueva pestaña
 		window.open(whatsappUrl, '_blank');
