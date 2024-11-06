@@ -144,7 +144,7 @@
 			transform: translateY(-100%);
 			position: fixed;
 			inset: 0;
-			background: var(--bg);
+			background: var(--yel);
 			padding: 24px;
 			gap: 24px;
 			display: flex;
@@ -167,6 +167,16 @@
 			font-size: 36px;
 			text-align: start;
 			transition: none;
+		}
+		.menu .btn {
+			background: transparent;
+			box-shadow: 0px 6px 0px -2px #d2a220, 0px 6px 0px 0px var(--text);
+		}
+		:global(.dark) .menu {
+			background: #8f45b3;
+		}
+		:global(.dark) .menu .btn {
+			box-shadow: 0px 6px 0px -2px #682f85, 0px 6px 0px 0px var(--text);
 		}
 	}
 </style>
