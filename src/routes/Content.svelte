@@ -185,7 +185,8 @@
 					<button
 						onclick={() => {
 							index = idx;
-							scrollPercentage = sectionSize + (50 / products.length);
+							scrollPercentage = index * sectionSize + (50 / products.length);
+							console.log(scrollPercentage)
 							slider.scroll({left: scrollPercentage * window.innerWidth / 100, behavior: "smooth"});
 						}}
 						type="button"

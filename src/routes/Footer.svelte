@@ -143,6 +143,9 @@
 			width: 100%;
 			justify-content: space-between;
 		}
+		.navs>.fcol {
+			flex: 1;
+		}
 		.info {
 			padding: 0 24px;
 		}
