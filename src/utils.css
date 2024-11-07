@@ -14,6 +14,10 @@
 	flex-direction: column;
 }
 
+.abs {
+	position: absolute;
+}
+
 .between {
 	justify-content: space-between;
 }
@@ -44,13 +48,6 @@
 	box-shadow: 0px 0px 0px -2px var(--shadow), 0px 0px 0px 0px var(--text);
 	transform: translateY(3px);
 }
-
-.c0 {color: var(--red)}
-.c1 {color: var(--ora)}
-.c2 {color: var(--yel)}
-.c3 {color: var(--gre)}
-.c4 {color: var(--blu)}
-.c5 {color: var(--vio)}
 
 @media (max-width: 1000px) {
 	.g32 { gap: 24px }

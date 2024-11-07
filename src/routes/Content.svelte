@@ -56,9 +56,11 @@
 	let headerInvisible = $state(false);
 	let index = $state(0);
 	let scrollPercentage = $state(0);
-	let text = $state('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg> Explore más abajo');
+	let text = $state('Explore más abajo');
 
 	let slider, main, fotos, stickyElement, video_container;
+
+	const sectionSize = 100 / products.length;
 
 	function updateScreenSize() {
 		isMobile = window.innerWidth < 1000;
@@ -75,7 +77,7 @@
 		if (isMobile) {
 			whiteHeader = top < 35;
 		} else {
-			text = top < 35 ? '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>Ver más' : '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>Explore más abajo'
+			text = top < 35 ? 'Ver más' : 'Explore más abajo'
 			whiteHeader = false
 		}
 
@@ -88,9 +90,10 @@
 		const totalScrollableDistance = fotos.offsetHeight - stickyElement.offsetHeight;
 
 		scrollPercentage = (distanceScrolled / totalScrollableDistance) * 100;
-		scrollPercentage = Math.min(Math.max(scrollPercentage, 0), 100); // Limitar a un rango de 0-100%
+		scrollPercentage = Math.min(Math.max(scrollPercentage, 0), 100);
 
-		const sectionSize = 100 / products.length;
+		// TODO: simular snapping
+
 		index = Math.min(Math.floor(scrollPercentage / sectionSize), products.length - 1);
 
 		slider.scroll((slider.scrollWidth - window.innerWidth) * scrollPercentage / 100, 0);
@@ -121,12 +124,34 @@
 />
 
 <main class:active={!show} bind:this={main}>
+	<svg class="abs deco1" width="100" height="260" viewBox="0 0 100 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<rect x="12" y="12" width="76" height="236" rx="38" stroke="#DADADA" stroke-width="24"/>
+	</svg>
+	<svg class="abs deco2"width="123" height="98" viewBox="0 0 123 98" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<rect x="-110" y="12" width="221" height="74" rx="37" stroke="#DADADA" stroke-width="24"/>
+	</svg>
+	<svg class="abs deco3" width="90" height="50" viewBox="0 0 90 50" fill="#DADADA" xmlns="http://www.w3.org/2000/svg">
+		<circle cx="5" cy="45" r="5" transform="rotate(-90 5 45)"/>
+		<circle cx="5" cy="25" r="5" transform="rotate(-90 5 25)"/>
+		<circle cx="5" cy="5" r="5" transform="rotate(-90 5 5)"/>
+		<circle cx="25" cy="45" r="5" transform="rotate(-90 25 45)"/>
+		<circle cx="25" cy="25" r="5" transform="rotate(-90 25 25)"/>
+		<circle cx="25" cy="5" r="5" transform="rotate(-90 25 5)"/>
+		<circle cx="45" cy="45" r="5" transform="rotate(-90 45 45)"/>
+		<circle cx="45" cy="25" r="5" transform="rotate(-90 45 25)"/>
+		<circle cx="45" cy="5" r="5" transform="rotate(-90 45 5)"/>
+		<circle cx="65" cy="45" r="5" transform="rotate(-90 65 45)"/>
+		<circle cx="65" cy="25" r="5" transform="rotate(-90 65 25)"/>
+		<circle cx="65" cy="5" r="5" transform="rotate(-90 65 5)"/>
+		<circle cx="85" cy="45" r="5" transform="rotate(-90 85 45)"/>
+		<circle cx="85" cy="25" r="5" transform="rotate(-90 85 25)"/>
+		<circle cx="85" cy="5" r="5" transform="rotate(-90 85 5)"/>
+	</svg>
 	<Header {whiteHeader} {headerInvisible}/>
 	<section id="welcome" class="fcol fcc p32">
 		<p>
-			Bienvenido a <strong>Join
-			<span class="c0">S</span><span class="c1">t</span><span class="c2">u</span><span class="c3">d</span><span class="c4">i</span><span class="c5">o</span></strong>,
-			una agencia creativa donde hacemos contenido de calidad especializado en tí.
+			Hola! somos una agencia <strong><span class="c0">c</span><span class="c1">r</span><span class="c2">e</span><span class="c3">a</span><span class="c4">t</span><span class="c5">i</span><span class="c0">v</span><span class="c1">a</span></strong>
+			donde hacemos contenido de calidad para tí.
 		</p>
 		{#if !headerInvisible}
 		<button type="button" class="scroll" onclick={() => {
@@ -160,7 +185,7 @@
 					<button
 						onclick={() => {
 							index = idx;
-							scrollPercentage = index / products.length * 100 + (50 / products.length);
+							scrollPercentage = sectionSize + (50 / products.length);
 							slider.scroll({left: scrollPercentage * window.innerWidth / 100, behavior: "smooth"});
 						}}
 						type="button"
@@ -175,6 +200,21 @@
 </main>
 
 <style>
+	svg.abs {
+		z-index: -1;
+	}
+	.deco1 {
+		right: 24px;
+		top: -90px;
+	}
+	.deco2 {
+		left: 0;
+		top: 67%;
+	}
+	.deco3 {
+		top: 18%;
+    left: 24px;
+	}
 	main {
 		opacity: 0;
 		overflow-y: hidden;
@@ -255,13 +295,14 @@
 		overflow-x: scroll;
 	}
 	#welcome {
+		position: relative;
 		align-items: flex-start;
 	}
 	#welcome p {
 		max-width: max(28ch, 50vw);
 	}
 	.scroll {
-		text-decoration: none;
+		align-self: center;
 		color: inherit;
 		z-index: 2;
 		position: absolute;
@@ -277,7 +318,7 @@
 		justify-content: center;
 		align-items: center;
 		border-radius: 32px;
-		border: 2px solid var(--text);
+		border: 4px solid var(--text);
 		background: var(--klk);
 		backdrop-filter: blur(2px);
 	}
@@ -286,7 +327,7 @@
 			font-size: 48px;
 		}
 		p {
-			font-size: 36px;
+			font-size: 6.6vw;
 		}
 		.img video {
 			filter: brightness(0.6);
@@ -298,7 +339,7 @@
 			--bg: #1E1E1E;
 			--text: #EFEFEF;
 			--text-low: #939393;
-			--text-input: #1C1D20;
+			--text-input: #DADADA;
 			--shadow: #3c3c3c;
 			--red: #FF6C6C;
 			--ora: #FF9D68;
@@ -323,8 +364,15 @@
 		}
 		.scroll {
 			transform: none !important;
-    	position: relative;
+			position: relative;
 			z-index: unset;
+			top: unset;
+			bottom: 48px;
+			left: 24px;
+			right: 24px;
+			width: fit-content;
+			position: absolute;
+			margin: auto;
 		}
 		.sticky {
 			grid-template-columns: 1fr;

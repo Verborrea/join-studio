@@ -29,7 +29,7 @@
 }
 
 :root, input, button {
-	font: 400 20px/1.2 'Geist', sans-serif;
+	font: 400 18px/1.2 'Poppins', sans-serif;
 }
 
 body {
@@ -86,12 +86,12 @@ a:active, button:active {
   background: #95ff34;
 }
 
-.c0 { animation-name: breathing_1 }
-.c1 { animation-name: breathing_2 }
-.c2 { animation-name: breathing_3 }
-.c3 { animation-name: breathing_4 }
-.c4 { animation-name: breathing_5 }
-.c5 { animation-name: breathing_6 }
+.c0 { color: var(--red); animation-name: breathing_1 }
+.c1 { color: var(--ora); animation-name: breathing_2 }
+.c2 { color: var(--yel); animation-name: breathing_3 }
+.c3 { color: var(--gre); animation-name: breathing_4 }
+.c4 { color: var(--blu); animation-name: breathing_5 }
+.c5 { color: var(--vio); animation-name: breathing_6 }
 
 @keyframes breathing_1 {
 	0%   { color: var(--red); }

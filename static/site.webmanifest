@@ -1,6 +1,6 @@
 {
   "name": "Join Studio",
-  "short_name": "Join",
+  "short_name": "JOIN",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -15,7 +15,7 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#EFEFEF",
+  "theme_color": "#FF595E",
   "background_color": "#EFEFEF",
   "display": "standalone"
 }
