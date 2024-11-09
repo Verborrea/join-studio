@@ -42,14 +42,9 @@
 			src: '/videos/shanti.webm'
 		}
 	]
-
 	const preloadedImages = [kombucha, don_luciano, ema, lujan, shanti];
 
-	let coords = spring({ x: 300, y: 200 }, {
-		stiffness: 0.08,
-		damping: 0.3
-	});
-
+	let coords = spring({ x: 300, y: 200 }, { stiffness: 0.08, damping: 0.3 });
 	let { show } = $props();
 	let isMobile = $state(false);
 	let whiteHeader = $state(false);
@@ -63,7 +58,7 @@
 	const sectionSize = 100 / products.length;
 
 	function updateScreenSize() {
-		isMobile = window.innerWidth < 1000;
+		isMobile = window.innerWidth < 1000
 		handleScroll()
 	};
 
@@ -109,18 +104,13 @@
 		if (isMobile) {
 			coords.set({ x: 0, y: 0 });
 		}
-
 		return () => window.removeEventListener('scroll', handleScroll);
 	});
 </script>
 
 <svelte:window 
 	onresize={updateScreenSize}
-	onmousemove={(e) => {
-		if (!isMobile) {
-			coords.set({ x: e.clientX, y: e.clientY });
-		}
-	}}
+	onmousemove={(e) => { if (!isMobile) coords.set({ x: e.clientX, y: e.clientY }) }}
 />
 
 <main class:active={!show} bind:this={main}>
@@ -130,22 +120,22 @@
 	<svg class="abs deco2"width="123" height="98" viewBox="0 0 123 98" fill="none" xmlns="http://www.w3.org/2000/svg">
 		<rect x="-110" y="12" width="221" height="74" rx="37" stroke="#DADADA" stroke-width="24"/>
 	</svg>
-	<svg class="abs deco3" width="90" height="50" viewBox="0 0 90 50" fill="#DADADA" xmlns="http://www.w3.org/2000/svg">
-		<circle cx="5" cy="45" r="5" transform="rotate(-90 5 45)"/>
-		<circle cx="5" cy="25" r="5" transform="rotate(-90 5 25)"/>
-		<circle cx="5" cy="5" r="5" transform="rotate(-90 5 5)"/>
-		<circle cx="25" cy="45" r="5" transform="rotate(-90 25 45)"/>
-		<circle cx="25" cy="25" r="5" transform="rotate(-90 25 25)"/>
-		<circle cx="25" cy="5" r="5" transform="rotate(-90 25 5)"/>
-		<circle cx="45" cy="45" r="5" transform="rotate(-90 45 45)"/>
-		<circle cx="45" cy="25" r="5" transform="rotate(-90 45 25)"/>
-		<circle cx="45" cy="5" r="5" transform="rotate(-90 45 5)"/>
-		<circle cx="65" cy="45" r="5" transform="rotate(-90 65 45)"/>
-		<circle cx="65" cy="25" r="5" transform="rotate(-90 65 25)"/>
-		<circle cx="65" cy="5" r="5" transform="rotate(-90 65 5)"/>
-		<circle cx="85" cy="45" r="5" transform="rotate(-90 85 45)"/>
-		<circle cx="85" cy="25" r="5" transform="rotate(-90 85 25)"/>
-		<circle cx="85" cy="5" r="5" transform="rotate(-90 85 5)"/>
+	<svg class="abs deco3" width="92" height="52" fill="#DADADA" viewBox="0 0 92 52" xmlns="http://www.w3.org/2000/svg">
+		<circle cx="6" cy="6" r="6"/>
+		<circle cx="26" cy="6" r="6"/>
+		<circle cx="46" cy="6" r="6"/>
+		<circle cx="66" cy="6" r="6"/>
+		<circle cx="86" cy="6" r="6"/>
+		<circle cx="6" cy="26" r="6"/>
+		<circle cx="26" cy="26" r="6"/>
+		<circle cx="46" cy="26" r="6"/>
+		<circle cx="66" cy="26" r="6"/>
+		<circle cx="86" cy="26" r="6"/>
+		<circle cx="6" cy="46" r="6"/>
+		<circle cx="26" cy="46" r="6"/>
+		<circle cx="46" cy="46" r="6"/>
+		<circle cx="66" cy="46" r="6"/>
+		<circle cx="86" cy="46" r="6"/>
 	</svg>
 	<Header {whiteHeader} {headerInvisible}/>
 	<section id="welcome" class="fcol fcc p32">
@@ -154,13 +144,13 @@
 			donde hacemos contenido de calidad para tí.
 		</p>
 		{#if !headerInvisible}
-		<button type="button" class="scroll" onclick={() => {
+		<button type="button" class="fcc scroll" onclick={() => {
 			main.scrollBy({
 				top: window.innerHeight,
 				behavior: "smooth"
 			});
 		}} style="transform: translate({$coords.x}px, {$coords.y}px);">
-			{@html text}
+			{text}
 		</button>
 		{/if}
 	</section>
@@ -239,8 +229,11 @@
 		font-size: 78px;
 		line-height: 1;
 	}
-	p {
+	#welcome p {
 		font-size: 48px;
+	}
+	#fotos p {
+		font-size: 24px;
 	}
 	span {
 		animation-duration: 2s;
@@ -307,28 +300,22 @@
 		color: inherit;
 		z-index: 2;
 		position: absolute;
+		font-size: 20px;
 		top: 0;
 		left: 0;
-		gap: 10px;
-		border-radius: 2em;
-		font-weight: 600;
-		word-wrap: break-word;
-		line-height: 1;
-		display: flex;
+		border-radius: 3em;
 		padding: 12px 24px;
-		justify-content: center;
-		align-items: center;
 		border-radius: 32px;
 		border: 4px solid var(--text);
+		font-weight: 600;
+		line-height: 1;
+		font-size: 20px;
 		background: var(--klk);
 		backdrop-filter: blur(2px);
 	}
 	@media (max-width: 1000px) {
 		h1 {
 			font-size: 48px;
-		}
-		p {
-			font-size: 6.6vw;
 		}
 		.img video {
 			filter: brightness(0.6);
@@ -380,6 +367,11 @@
 		}
 		.slider {
 			padding: 24px 50%;
+		}
+	}
+	@media (max-width: 600px) {
+		#welcome p {
+			font-size: 9vw;
 		}
 	}
 </style>

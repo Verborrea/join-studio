@@ -13,7 +13,6 @@
 
 <section id="footer">
 	<header class="p32 between">
-		<h1>Join<br/><span class="c0">S</span><span class="c1">t</span><span class="c2">u</span><span class="c3">d</span><span class="c4">i</span><span class="c5">o</span></h1>
 		<svg width="144" height="144" viewBox="0 0 1000 1000" fill="var(--text)" xmlns="http://www.w3.org/2000/svg">
 			<path d="M826.85 712.959C843.857 695.222 855.891 672.974 861.408 648.991C888.116 673.797 935.578 642.311 918.265 607.559C918.265 607.559 783.837 277.648 716.66 112.816C701.469 69.2643 631.305 96.9701 650.17 139.559L828.578 577.34C883.436 711.456 686.138 794.478 630.362 660.625C572.37 524.852 518.024 385.782 462.539 248.745L525.455 213.2C582.678 353.746 639.986 494.259 697.272 634.778C713.333 678.518 783.082 649.052 763.905 608.428C715.299 489.111 581.331 160.359 581.331 160.359C535 42 711.631 -42.7862 776.224 71.5525C845.456 240.161 985.17 581.601 985.17 581.601C1024.51 676.92 913.102 770.449 826.85 712.959Z"/>
 			<path d="M519.617 578.602C519.617 578.602 429.077 363.888 401 295C348.424 166 153.315 228.839 205 375C243.877 470.436 284.254 571.111 323.353 666.455C380.583 796.022 568.961 699.283 519.617 578.602ZM387.89 635.115L271.277 348.905C256.526 307.02 317.501 281.014 337.238 321.097L454.326 608.456C473.533 650.504 404.247 678.199 387.89 635.115Z"/>
@@ -45,12 +44,12 @@
 				<p>Arequipa</p>
 				<a href="tel:51910880595">T. +51 910 880 595</a>
 				<a href="https://maps.app.goo.gl/93u99cXdLsiyXadY8" target="_blank">Francisco Bolognesi 108, Cercado</a>
+				<p>04001</p>
 			</address>
 			<div class="navs fc">
 				<nav class="fcol">
-					<a href="/">Talento</a>
-					<a href="/">Trabajo</a>
-					<a href="/">Nosotros</a>
+					<a href="/">Inicio</a>
+					<a href="/talento">Talento</a>
 				</nav>
 				<nav class="fcol">
 					<a href="https://www.instagram.com/joinstudio.tv/" target="_blank">TikTok</a>
@@ -59,10 +58,7 @@
 				</nav>
 			</div>
 		</div>
-		<div class="copy p32 fc between">
-			<p>&copy; 2025 Join Studio • Todos los derechos reservados</p>
-			<a href="/">Términos y condiciones</a>
-		</div>
+		<p class="fcc p32">&copy; 2025 Join Studio</p>
 	</footer>
 </section>
 
@@ -132,10 +128,7 @@
 		align-items: flex-start;
 	}
 	@media (max-width: 1000px) {
-		.copy {
-			align-items: flex-start;
-		}
-		.info, .copy {
+		.info {
 			flex-direction: column;
 			gap: 24px;
 		}

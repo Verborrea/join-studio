@@ -2,29 +2,26 @@
 	display: flex;
 	align-items: center;
 }
-
 .fcc {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
-
 .fcol {
 	display: flex;
 	flex-direction: column;
 }
-
 .abs {
 	position: absolute;
 }
-
 .between {
 	justify-content: space-between;
 }
-
 .g32 { gap: 32px }
-
 .p32 { padding: 32px }
+.grow {
+	flex: 1;
+}
 
 .btn {
 	color: inherit;

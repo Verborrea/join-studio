@@ -23,9 +23,11 @@
 	--blu: #1982C4;
 	--vio: #6A4C93;
 	--klk: #efefef80;
+	--deco: #E3E3E3;
 
 	color-scheme: only light;
 	overflow-x: hidden;
+	-webkit-tap-highlight-color:  rgba(255, 255, 255, 0); 
 }
 
 :root, input, button {
@@ -50,6 +52,7 @@ body.dark {
 	--blu: #70C4EE;
 	--vio: #ED99EC;
 	--klk: #1E1E1E80;
+	--deco: #E3E3E3;
 
 	::selection {
 		background: #57a016;
@@ -83,7 +86,7 @@ a:active, button:active {
 }
 
 ::selection {
-  background: #95ff34;
+	background: #ffdf9c;
 }
 
 .c0 { color: var(--red); animation-name: breathing_1 }

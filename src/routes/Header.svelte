@@ -50,9 +50,8 @@
 <header class="fc between g32 p32" class:whiteHeader class:headerInvisible>
 	<a href="/" id="title" class="title" class:active>Join Studio</a>
 	<nav id="nav" class="do fc g32">
-		<a href="/">Talento</a>
-		<a href="/">Trabajo</a>
-		<a href="/">Nosotros</a>
+		<a href="/">Inicio</a>
+		<a href="/talento">Talento</a>
 	</nav>
 	<div class="do fc g32">
 		<button type="button" aria-label="Cambiar tema" title="Cambiar tema" onclick={toggleTheme}>
