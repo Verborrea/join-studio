@@ -73,9 +73,7 @@
 	<article class="menu mo" class:active>
 		<nav class="fcol">
 			<a href="/">Inicio</a>
-			<a href="/">Talento</a>
-			<a href="/">Trabajo</a>
-			<a href="/">Nosotros</a>
+			<a href="/talento">Talento</a>
 			<button type="button" class="fc between" onclick={toggleTheme}>
 				<span>Tema</span>
 				{#if mode}
