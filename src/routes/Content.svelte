@@ -210,7 +210,7 @@
 		opacity: 0;
 		overflow-y: hidden;
 
-		height: 100vh;
+		height: 100svh;
 		scroll-snap-type: y mandatory;
 		scroll-behavior: smooth;
 	}
@@ -223,7 +223,7 @@
 		scroll-snap-align: start !important;
 	}
 	section {
-		min-height: 100vh;
+		min-height: 100svh;
 	}
 	h1 {
 		font-size: 78px;
@@ -244,7 +244,7 @@
 	video {
 		border-radius: 32px;
 		width: 100%;
-		height: calc(100vh - 144px);
+		height: calc(100svh - 144px);
 		aspect-ratio: 9 / 16;
 		position: absolute;
 		inset: 0;
@@ -258,7 +258,7 @@
 		border-radius: 12px;
 	}
 	.large {
-		min-height: 500vh;
+		min-height: 500svh;
 	}
 	.sticky {
 		position: sticky;
@@ -275,7 +275,7 @@
 	}
 	.img {
 		align-self: flex-end;
-		height: calc(100vh - 144px);
+		height: calc(100svh - 144px);
     aspect-ratio: 9 / 16;
     position: relative;
 	}
@@ -321,7 +321,7 @@
 			filter: brightness(0.6);
 			border-radius: 0;
 			max-height: unset;
-			height: 100vh;
+			height: 100svh;
 		}
 		#fotos {
 			--bg: #1E1E1E;

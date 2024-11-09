@@ -86,7 +86,7 @@
 	}
 	section {
 		scroll-snap-align: start !important;
-		min-height: 100vh;
+		min-height: 100svh;
 		display: flex;
 		justify-content: space-between;
 		flex-direction: column;

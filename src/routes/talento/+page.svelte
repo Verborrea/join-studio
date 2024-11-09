@@ -60,10 +60,10 @@
 		transform: translateX(-43vw);
 	}
 	section.second, .fcc {
-		height: 100vh;
+		height: 100svh;
 	}
 	section.circle {
-		height: 300vh;
+		height: 300svh;
 	}
 	.person {
     transform-origin: left;
