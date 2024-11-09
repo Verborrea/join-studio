@@ -10,38 +10,14 @@
 	let double = $derived(winw / 2)
 
 	const people = [
-		{
-			name: 'Erick Porroa',
-			desc: 'Productor'
-		},
-		{
-			name: 'Carlos Solis',
-			desc: 'Productor'
-		},
-		{
-			name: 'César Soplin',
-			desc: 'Creador Digital'
-		},
-		{
-			name: 'Alan Monroy',
-			desc: 'Desarrollador Web'
-		},
-		{
-			name: 'Adriana Velazco',
-			desc: 'Diseñadora Gráfica'
-		},
-		{
-			name: 'Juan Carlos Llanos',
-			desc: 'Experto en reputación'
-		},
-		{
-			name: 'Gustavo Inojoque',
-			desc: 'Filmmaker'
-		},
-		{
-			name: 'Marko Manrique',
-			desc: 'Genio Creativo'
-		}
+		{ name: 'Erick Porroa', desc: 'Productor' },
+		{ name: 'Carlos Solis', desc: 'Productor' },
+		{ name: 'César Soplin', desc: 'Creador Digital' },
+		{ name: 'Alan Monroy', desc: 'Desarrollador Web' },
+		{ name: 'Adriana Velazco', desc: 'Diseñadora Gráfica' },
+		{ name: 'Juan Carlos Llanos', desc: 'Experto en reputación' },
+		{ name: 'Gustavo Inojoque', desc: 'Filmmaker' },
+		{ name: 'Marko Manrique', desc: 'Genio Creativo' }
 	]
 </script>
 
@@ -84,10 +60,10 @@
 		transform: translateX(-43vw);
 	}
 	section.second, .fcc {
-		height: 100dvh;
+		height: 100vh;
 	}
 	section.circle {
-		height: 300dvh;
+		height: 300vh;
 	}
 	.person {
     transform-origin: left;

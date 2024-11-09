@@ -40,7 +40,7 @@
 	.container1, .container2 {
 		position: absolute;
 		overflow: hidden;
-		height: 100dvh;
+		height: 100vh;
 		width: 100vw;
 	}
 	.container1 {
