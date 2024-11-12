@@ -48,7 +48,6 @@
 	let coords = spring({ x: 300, y: 200 }, { stiffness: 0.08, damping: 0.3 });
 	let { show } = $props();
 	let isMobile = $state(false);
-	let whiteHeader = $state(false);
 	let headerInvisible = $state(false);
 	let index = $state(0);
 	let scrollPercentage = $state(0);
@@ -206,17 +205,18 @@
 	}
 	main {
 		display: contents;
-		opacity: 0;
-		overflow-y: hidden;
-
+		overflow-y: scroll;
+		
 		height: 100dvh;
 		scroll-snap-type: y mandatory;
 		scroll-behavior: smooth;
 	}
-	main.active {
+	main>* {
+		opacity: 0;
+	}
+	main.active > * {
 		animation: help 1.2s;
 		opacity: 1;
-		overflow-y: scroll;
 	}
 	#welcome, #fotos {
 		scroll-snap-align: center;
@@ -333,6 +333,9 @@
 		#welcome {
 			align-items: unset;
 			gap: 24px;
+		}
+		#welcome p {
+			max-width: 100%;
 		}
 		.img {
 			position: absolute;

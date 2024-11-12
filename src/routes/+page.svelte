@@ -17,5 +17,6 @@
 
 {#if show}
 <Intro on:ready={showPage}/>
-{/if}
+{:else}
 <Content {show}/>
+{/if}
