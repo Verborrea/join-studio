@@ -86,7 +86,8 @@
 		font-style: normal;
 	}
 	article {
-		scroll-snap-align: start;
+		overflow-x: hidden;
+		scroll-snap-align: center;
 		min-height: 100svh;
 	}
 	form {

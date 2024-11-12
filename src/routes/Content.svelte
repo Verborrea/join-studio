@@ -1,6 +1,7 @@
 <script>
 	import Header from '$lib/Header.svelte';
 	import Footer from '$lib/Footer.svelte';
+	import Rainbow from '$lib/Rainbow.svelte';
 	import { onMount } from 'svelte';
 	import { spring } from 'svelte/motion';
 
@@ -134,13 +135,13 @@
 		<circle cx="86" cy="46" r="6"/>
 	</svg>
 	<Header/>
-	<section id="welcome" class="fcol fcc p32">
+	<section id="welcome" class="fcol fcc g32 p32">
+		<h1>Hola!</h1>
 		<p>
-			Hola! somos una agencia <strong><span class="c0">c</span><span class="c1">r</span><span class="c2">e</span><span class="c3">a</span><span class="c4">t</span><span class="c5">i</span><span class="c0">v</span><span class="c1">a</span></strong>
-			donde hacemos contenido de calidad para tí.
+			Somos <strong>Join Studio</strong> una agencia <Rainbow text="creativa"/> dedicada a contar historias que impactan.
 		</p>
 		{#if !headerInvisible}
-		<button type="button" class="fcc scroll" onclick={() => {
+		<button type="button" class="btn fcc scroll" onclick={() => {
 			main.scrollBy({
 				top: window.innerHeight,
 				behavior: "smooth"
@@ -208,7 +209,7 @@
 		opacity: 0;
 		overflow-y: hidden;
 
-		height: 100svh;
+		height: 100dvh;
 		scroll-snap-type: y mandatory;
 		scroll-behavior: smooth;
 	}
@@ -217,32 +218,29 @@
 		opacity: 1;
 		overflow-y: scroll;
 	}
-	main>* {
-		scroll-snap-align: start !important;
+	#welcome, #fotos {
+		scroll-snap-align: center;
 	}
 	section {
-		min-height: 100svh;
+		min-height: 100dvh;
 	}
 	h1 {
 		font-size: 78px;
 		line-height: 1;
 	}
-	#welcome p {
-		font-size: 48px;
+	p strong {
+		background: var(--yel);
+	}
+	#welcome {
+		text-align: center;
 	}
 	#fotos p {
 		font-size: 24px;
 	}
-	span {
-		animation-duration: 2s;
-		animation-timing-function: linear;
-		animation-iteration-count: infinite;
-		animation-fill-mode: both;
-	}
 	video {
 		border-radius: 32px;
 		width: 100%;
-		height: calc(100svh - 144px);
+		height: calc(100dvh - 144px);
 		aspect-ratio: 9 / 16;
 		position: absolute;
 		inset: 0;
@@ -256,7 +254,7 @@
 		border-radius: 12px;
 	}
 	.large {
-		min-height: 500svh;
+		min-height: 500dvh;
 	}
 	.sticky {
 		position: sticky;
@@ -273,7 +271,7 @@
 	}
 	.img {
 		align-self: flex-end;
-		height: calc(100svh - 144px);
+		height: calc(100dvh - 144px);
     aspect-ratio: 9 / 16;
     position: relative;
 	}
@@ -288,7 +286,6 @@
 	}
 	#welcome {
 		position: relative;
-		align-items: flex-start;
 	}
 	#welcome p {
 		max-width: max(28ch, 50vw);
@@ -301,10 +298,6 @@
 		font-size: 20px;
 		top: 0;
 		left: 0;
-		border-radius: 3em;
-		padding: 12px 24px;
-		border-radius: 32px;
-		border: 4px solid var(--text);
 		font-weight: 600;
 		line-height: 1;
 		font-size: 20px;
@@ -319,7 +312,7 @@
 			filter: brightness(0.6);
 			border-radius: 0;
 			max-height: unset;
-			height: 100svh;
+			height: 100dvh;
 		}
 		#fotos {
 			--bg: #1E1E1E;

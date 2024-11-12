@@ -67,6 +67,9 @@
 <Footer/>
 
 <style>
+	.rel {
+		overflow-x: hidden;
+	}
 	section {
 		scroll-snap-align: center;
 		height: 100dvh;
@@ -138,6 +141,9 @@
 		display: none;
 	}
 	@media (max-width: 1000px) {
+		.imgd {
+			display: flex;
+		}
 		p {
 			font-size: 24px;
 		}

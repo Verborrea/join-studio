@@ -65,6 +65,9 @@
 <Footer/>
 
 <style>
+	.rel {
+		overflow-x: hidden;
+	}
 	.deco1, .deco2, .deco3 {
 		z-index: -1;
 	}
