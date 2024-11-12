@@ -2,6 +2,10 @@
 	display: flex;
 	align-items: center;
 }
+.fs {
+	display: flex;
+	align-items: flex-start;
+}
 .fcc {
 	display: flex;
 	align-items: center;
@@ -11,9 +15,10 @@
 	display: flex;
 	flex-direction: column;
 }
-.abs {
-	position: absolute;
-}
+
+.rel { position: relative }
+.abs { position: absolute }
+
 .between {
 	justify-content: space-between;
 }
@@ -46,9 +51,18 @@
 	transform: translateY(3px);
 }
 
+.mo {
+	display: none;
+}
 @media (max-width: 1000px) {
 	.g32 { gap: 24px }
 	.p32 { padding: 24px }
+	.do {
+		display: none;
+	}
+	.mo {
+		display: initial;
+	}
 }
 
 @keyframes help {

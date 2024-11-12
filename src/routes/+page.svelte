@@ -2,7 +2,7 @@
 	import Intro from './Intro.svelte'
 	import Content from './Content.svelte'
 
-	let show = $state(true);
+	let show = $state(false);
 	
 	function showPage() {
 		setTimeout(() => {
@@ -11,9 +11,11 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Join Studio • Agencia Creativa</title>
+</svelte:head>
 
-
-{#if show}
+<!-- {#if show}
 <Intro on:ready={showPage}/>
-{/if}
+{/if} -->
 <Content {show}/>

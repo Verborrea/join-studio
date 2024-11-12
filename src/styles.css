@@ -23,15 +23,18 @@
 	--blu: #1982C4;
 	--vio: #6A4C93;
 	--klk: #efefef80;
-	--deco: #E3E3E3;
+	--deco: #e4e4e4;
+	--deco2: #cdcdcd;
 
 	color-scheme: only light;
 	overflow-x: hidden;
 	-webkit-tap-highlight-color:  rgba(255, 255, 255, 0); 
+	scroll-snap-type: y mandatory;
+	scroll-behavior: smooth;
 }
 
 :root, input, button {
-	font: 400 18px/1.2 'Poppins', sans-serif;
+	font: 400 20px/1.2 'Poppins', sans-serif;
 }
 
 body {
@@ -52,11 +55,27 @@ body.dark {
 	--blu: #70C4EE;
 	--vio: #ED99EC;
 	--klk: #1E1E1E80;
-	--deco: #E3E3E3;
+	--deco: #3e3e3e;
+	--deco2: #3e3e3e;
 
 	::selection {
-		background: #57a016;
+		background: #d540e2;
 	}
+}
+
+h1 {
+	line-height: 1;
+	font-weight: 500;
+	font-size: 96px;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+section p {
+	font-size: 36px;
 }
 
 video, img, svg {
@@ -95,6 +114,15 @@ a:active, button:active {
 .c3 { color: var(--gre); animation-name: breathing_4 }
 .c4 { color: var(--blu); animation-name: breathing_5 }
 .c5 { color: var(--vio); animation-name: breathing_6 }
+
+@media (max-width: 1000px) {
+	h1 {
+		font-size: 40px;
+	}
+	section p {
+		font-size: 28px;
+	}
+}
 
 @keyframes breathing_1 {
 	0%   { color: var(--red); }

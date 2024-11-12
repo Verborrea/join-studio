@@ -1,6 +1,6 @@
 <script>
-	import Header from './Header.svelte';
-	import Footer from './Footer.svelte';
+	import Header from '$lib/Header.svelte';
+	import Footer from '$lib/Footer.svelte';
 	import { onMount } from 'svelte';
 	import { spring } from 'svelte/motion';
 
@@ -69,11 +69,8 @@
 	function handleScroll() {
 		const { top } = fotos.getBoundingClientRect();
 
-		if (isMobile) {
-			whiteHeader = top < 35;
-		} else {
+		if (!isMobile) {
 			text = top < 35 ? 'Ver más' : 'Explore más abajo'
-			whiteHeader = false
 		}
 
 		const { bottom: footer_bottom } = fotos.getBoundingClientRect();
@@ -99,17 +96,16 @@
 	})
 
 	onMount(() => {
-		main.addEventListener('scroll', handleScroll);
 		updateScreenSize();
 		if (isMobile) {
 			coords.set({ x: 0, y: 0 });
 		}
-		return () => window.removeEventListener('scroll', handleScroll);
 	});
 </script>
 
 <svelte:window 
 	onresize={updateScreenSize}
+	onscroll={handleScroll}
 	onmousemove={(e) => { if (!isMobile) coords.set({ x: e.clientX, y: e.clientY }) }}
 />
 
@@ -137,7 +133,7 @@
 		<circle cx="66" cy="46" r="6"/>
 		<circle cx="86" cy="46" r="6"/>
 	</svg>
-	<Header {whiteHeader} {headerInvisible}/>
+	<Header/>
 	<section id="welcome" class="fcol fcc p32">
 		<p>
 			Hola! somos una agencia <strong><span class="c0">c</span><span class="c1">r</span><span class="c2">e</span><span class="c3">a</span><span class="c4">t</span><span class="c5">i</span><span class="c0">v</span><span class="c1">a</span></strong>
@@ -191,6 +187,7 @@
 </main>
 
 <style>
+	
 	svg.abs {
 		z-index: -1;
 	}
@@ -207,6 +204,7 @@
     left: 24px;
 	}
 	main {
+		display: contents;
 		opacity: 0;
 		overflow-y: hidden;
 
