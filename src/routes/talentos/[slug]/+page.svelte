@@ -37,7 +37,7 @@
 	<svg class="abs deco1 mo" width="195" height="171" viewBox="0 0 195 171" fill="none" xmlns="http://www.w3.org/2000/svg">
 		<rect x="12" y="12" width="259" height="147" rx="52" stroke="#E4E4E4" stroke-width="24"/>
 	</svg>
-	<svg class="abs deco3" width="1440" height="890" viewBox="0 0 1440 890" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<svg class="abs deco3 do" width="1440" height="890" viewBox="0 0 1440 890" fill="none" xmlns="http://www.w3.org/2000/svg">
 		<path d="M1440 870H700.05C624.5 870 620 754.875 700.287 754.875L944.617 755.378C1022 755.378 1022 639.252 944.856 639.252H478.996C478.996 639.252 332.495 651.217 332.495 491.162V138.541C332.495 57.5131 285.499 20 215.495 20L0.000488281 20" stroke="#E4E4E4" stroke-width="40"/>
 	</svg>
 	<section class="image">
