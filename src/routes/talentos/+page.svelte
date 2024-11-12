@@ -65,9 +65,6 @@
 <Footer/>
 
 <style>
-	.rel {
-		overflow-x: hidden;
-	}
 	.deco1, .deco2, .deco3 {
 		z-index: -1;
 	}
@@ -89,7 +86,7 @@
 		border-radius: 32px;
 	}
 	section {
-		scroll-snap-align: start;
+		scroll-snap-align: center;
 	}
 	section.second, .sticky {
 		height: 100svh;
@@ -151,7 +148,7 @@
 			stroke-width: 24
 		}
 		.deco2 {
-			right: -65%;
+			right: 0;
 			bottom: -3%;
 		}
 		h1 {

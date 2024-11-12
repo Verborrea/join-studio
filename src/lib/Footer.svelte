@@ -131,7 +131,7 @@
 			left: -29%;
 		}
 		.deco2 {
-			right: -27%;
+			right: -50%;
 		}
 		.deco1 rect, .deco2 path {
 			stroke-width: 24
