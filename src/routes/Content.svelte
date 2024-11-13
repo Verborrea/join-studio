@@ -363,7 +363,7 @@
 			padding: 24px 50%;
 		}
 	}
-	@media (max-width: 600px) {
+	@media (max-width: 700px) {
 		#welcome p {
 			font-size: 9vw;
 		}

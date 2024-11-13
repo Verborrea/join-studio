@@ -46,8 +46,8 @@
 	})
 </script>
 
-<header class="fc between g32 p32" class:active>
-	<a href="/" id="title" class="title" class:active class:white title="Inicio" aria-label="Inicio">
+<header class="fc between g32 p32">
+	<a href="/" id="title" class="title" class:white title="Inicio" aria-label="Inicio">
 		<svg width="80" height="80" viewBox="0 0 480 480" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 			<path d="M396.888 342.22C405.051 333.706 410.828 323.027 413.476 311.515C426.296 323.422 449.078 308.309 440.767 291.628L343.997 54.1518C336.705 33.2468 303.027 46.5456 312.082 66.9884L397.718 277.123C424.049 341.499 329.346 381.349 302.574 317.1L222.019 119.397L252.218 102.336L334.691 304.694C342.4 325.688 375.879 311.545 366.674 292.045L279.039 76.9723C256.8 20.1599 341.583 -20.5374 372.588 34.3451L472.882 279.169C491.765 324.922 438.289 369.816 396.888 342.22Z"/>
 			<path d="M249.416 277.729L192.48 141.6C167.243 79.6798 73.5912 109.843 98.4 180L155.21 319.898C182.68 382.09 273.101 335.656 249.416 277.729ZM186.187 304.855L130.213 167.474C123.132 147.37 152.4 134.886 161.874 154.126L218.076 292.059C227.296 312.242 194.039 325.535 186.187 304.855Z"/>
@@ -61,11 +61,7 @@
 			<path d="M426.766 471.837C402.308 471.837 384.082 452.722 384.082 428.47C384.082 404.228 402.29 385.022 426.766 385.022C451.229 385.022 469.691 404.156 469.691 428.457C469.691 452.793 451.253 471.824 426.779 471.824L426.766 471.837ZM426.766 462.149C445.593 462.149 458.909 446.831 458.909 428.47C458.909 410.043 445.679 394.71 426.766 394.71C407.923 394.71 394.622 410.111 394.622 428.47C394.622 446.83 407.94 462.149 426.766 462.149Z"/>
 		</svg>
 	</a>
-	<nav id="nav" class="do fc g32">
-		<a href="/">Inicio</a>
-		<a href="/talentos">Talentos</a>
-	</nav>
-	<div class="do fc g32">
+	<div class="fc g32">
 		<button type="button" aria-label="Cambiar tema" title="Cambiar tema" onclick={toggleTheme}>
 			{#if mode}
 				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
@@ -80,104 +76,34 @@
 			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" x2="14" y1="3" y2="10"/><line x1="3" x2="10" y1="21" y2="14"/></svg>
 			{/if}
 		</button>
-		<a href="https://wa.me/51910880595?text=Hola!" target="_blank" class="btn">Hablemos</a>
+		<a href="https://wa.me/51910880595?text=Hola!" target="_blank" class="mo" title="Hablemos" aria-label="Hablemos">
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></svg>
+		</a>
+		<a href="https://wa.me/51910880595?text=Hola!" target="_blank" class="btn do">
+			Hablemos
+		</a>
 	</div>
-	<article class="menu mo" class:active>
-		<nav class="fcol">
-			<a href="/">Inicio</a>
-			<a href="/talentos">Talentos</a>
-			<button type="button" class="fc between" onclick={toggleTheme}>
-				<span>Tema</span>
-				{#if mode}
-				<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
-				{:else}
-				<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
-				{/if}
-			</button>
-			<button type="button" class="fc between" onclick={toggleFullScreen}>
-				<span>Pantalla</span>
-				{#if isFullScreenSize}
-				<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" x2="21" y1="10" y2="3"/><line x1="3" x2="10" y1="21" y2="14"/></svg>
-				{:else}
-				<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" x2="14" y1="3" y2="10"/><line x1="3" x2="10" y1="21" y2="14"/></svg>
-				{/if}
-			</button>
-		</nav>
-		<a href="https://wa.me/51910880595?text=Hola!" target="_blank" class="btn">Hablemos</a>
-	</article>
-	<button id="menu" class="menubtn mo" type="button" class:active class:white onclick={() => {
-		active = !active
-	}}>
-		{active ? 'cerrar' : 'menú'}
-	</button>
 </header>
 <style>
 	header {
 		z-index: 1;
 		position: absolute;
 		inset: 0 0 auto 0;
-		transition: 0.2s ease-in-out;
 	}
-	.title, nav a, .menubtn {
+	.title {
 		color: inherit;
 		text-decoration: none;
 		font-weight: 500;
-	}
-	nav a:hover {
-		color: var(--text-low);
-	}
-	#menu, #title {
 		position: relative;
 		z-index: 1;
 	}
-	#title.white, #menu.white {
+	#title.white {
 		color: white;
 	}
 	@media (max-width: 1000px) {
-		header.active {
-			position: fixed;
-		}
 		#title svg {
-			width: 48px;
-			height: 48px;
-		}
-		.menu {
-			transform: translateY(-100%);
-			position: fixed;
-			inset: 0;
-			background: var(--yel);
-			padding: 24px;
-			gap: 24px;
-			display: flex;
-			flex-direction: column;
-			justify-content: flex-end;
-			transition: .5s ease-in-out;
-		}
-		.menu.active {
-			transform: translateY(0);
-		}
-		.menu nav {
-			gap: 8px;
-		}
-		.menu nav a:hover {
-			color: inherit;
-		}
-		.menu nav>* {
-			color: inherit;
-			font-weight: 500;
-			font-size: 36px;
-			text-align: start;
-			transition: none;
-		}
-		.menu .btn {
-			background: transparent;
-			box-shadow: 0px 6px 0px -2px #d2a220, 0px 6px 0px 0px var(--text);
-		}
-		:global(.dark) .menu {
-			background: #8f45b3;
-		}
-		:global(.dark) .menu .btn {
-			box-shadow: 0px 6px 0px -2px #682f85, 0px 6px 0px 0px var(--text);
+			width: 56px;
+			height: 56px;
 		}
 	}
 </style>

@@ -4,12 +4,10 @@
 	font-weight: 100 900;
 	font-stretch: 100%;
 }
-
 *, *::after, *::before {
 	margin: 0;
 	box-sizing: border-box;
 }
-
 :root {
 	--bg: #EFEFEF;
 	--text: #1C1D20;
@@ -25,23 +23,21 @@
 	--klk: #efefef80;
 	--deco: #e4e4e4;
 	--deco2: #cdcdcd;
+	--highlight: #FFCA3A;
 
 	color-scheme: only light;
 	overflow-x: hidden;
+	/* scroll-snap-type: y mandatory; */
+	scroll-behavior: smooth;
 	-webkit-tap-highlight-color:  rgba(255, 255, 255, 0); 
-	/* scroll-snap-type: y mandatory;
-	scroll-behavior: smooth; */
 }
-
 :root, input, button {
 	font: 400 20px/1.2 'Poppins', sans-serif;
 }
-
 body {
 	color: var(--text);
 	background: var(--bg);
 }
-
 body.dark {
 	--bg: #1E1E1E;
 	--text: #EFEFEF;
@@ -57,40 +53,31 @@ body.dark {
 	--klk: #1E1E1E80;
 	--deco: #3e3e3e;
 	--deco2: #3e3e3e;
-
-	::selection {
-		background: #d540e2;
-	}
+	--highlight: #8862A7;
 }
-
+a {
+	color: inherit;
+	font-weight: 600;
+	text-decoration: none;
+}
 h1 {
 	line-height: 1;
 	font-weight: 500;
 	font-size: 96px;
 }
-
-a {
-	color: inherit;
-	text-decoration: none;
-}
-
 section p {
 	font-size: 36px;
 }
-
 video, img, svg {
 	display: block;
 }
-
 video, img {
 	object-fit: cover;
 }
-
 strong {
 	color: var(--text);
 	font-weight: 600;
 }
-
 button {
 	background: transparent;
 	cursor: pointer;
@@ -99,15 +86,18 @@ button {
 	padding: 0;
 	transition: transform .2s ease-out;
 }
-
+mark {
+	background: var(--highlight);
+	line-height: 1.15;
+	display: inline-block;
+	padding-inline: 4px;
+}
 a:active, button:active {
 	scale: 0.95;
 }
-
 ::selection {
-	background: #ffdf9c;
+	background: var(--highlight);
 }
-
 .c0 { color: var(--red); animation-name: breathing_1 }
 .c1 { color: var(--ora); animation-name: breathing_2 }
 .c2 { color: var(--yel); animation-name: breathing_3 }
@@ -117,13 +107,30 @@ a:active, button:active {
 
 @media (max-width: 1000px) {
 	h1 {
-		font-size: 40px;
+		font-size: 72px;
 	}
 	section p {
-		font-size: 28px;
+		font-size: 27px;
 	}
 }
 
+@media (max-width: 700px) {
+	h1 {
+		font-size: 48px;
+	}
+	section p {
+		font-size: 24px;
+	}
+}
+
+@keyframes markit {
+	from {
+		background-position: 100% 0;
+	}
+	to {
+		background-position: 0 0;
+	}
+}
 @keyframes breathing_1 {
 	0%   { color: var(--red); }
 	17%  { color: var(--vio); }

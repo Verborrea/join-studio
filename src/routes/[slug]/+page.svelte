@@ -90,11 +90,9 @@
 				Hey! me encargo de <Rainbow text="diseñar"/> y <strong>desarrollar</strong> soluciones basadas en <em>tecnología</em>
 				para su empresa. Web, IA, seguridad, creación de sistemas, todo eso y más...
 			</p>
+			<a href="/#circle" class="link">Ver + talentos</a>
 		</article>
 	</section>
-</section>
-<section class="fcc p32">
-	<a href="/talentos" class="link"><h1>Ver más talentos</h1></a>
 </section>
 <Footer/>
 
@@ -131,12 +129,11 @@
 		display: flex;
     align-items: flex-end;
 	}
-	.desc{
+	.desc {
 		font-size: 48px;
 		color: var(--text-low);
 	}
 	.link {
-		font-size: 8vw;
 		display: block;
 		padding: 0.5em 0.75em;
 		transition: 0.2s ease-in-out;
@@ -182,11 +179,17 @@
 		background: white;
 		border-radius: 50%;
 	}
-	@media (max-width: 1000px) {
+	@media (max-width: 600px) {
+		.mo {
+			display: block;
+		}
 		.imgd {
 			display: flex;
 		}
-		p {
+		.desc {
+			font-size: 24px;
+		}
+		.link {
 			font-size: 24px;
 		}
 		article .fcol {
@@ -213,7 +216,7 @@
 			height: 100dvh;
 		}
 		.desc {
-			font-size: 28px;
+			/* font-size: 28px; */
 		}
 		.content {
 			width: 100%;

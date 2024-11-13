@@ -12,11 +12,17 @@
 </script>
 
 <article id="footer" class="fcol between rel">
-	<svg class="abs deco1" width="321" height="166" viewBox="0 0 321 166" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<svg class="do deco deco1" width="321" height="166" viewBox="0 0 321 166" fill="none" xmlns="http://www.w3.org/2000/svg">
 		<rect x="-174" y="20" width="475" height="126" rx="63" stroke="var(--deco)" stroke-width="40"/>
 	</svg>
-	<svg class="abs deco2" width="406" height="603" viewBox="0 0 406 603" fill="none" xmlns="http://www.w3.org/2000/svg">
-		<path d="M406 583L294.498 583C221.298 583 221.299 515.498 221.299 515.498L221.299 415.754C221.299 415.754 227.886 352.995 158.347 352.995L81.9197 352.995C50.688 352.995 20 330.551 20 303.153L20 99.2326C20 42.9326 36.9779 20.0005 104.89 20.0005L406 20.0005" stroke="var(--deco)" stroke-width="40"/>
+	<svg class="do deco deco2" width="340" height="571" viewBox="0 0 340 571" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<path d="M340 20H91.035C34.2069 20 20 41.6287 20 94.7286L20 287.059C20.0001 312.899 45.6793 334.068 71.8137 334.068H135.767C193.957 334.068 188.444 393.259 188.444 393.259V487.334C188.444 487.334 188.444 551 249.697 551H340" stroke="var(--deco)" stroke-width="40"/>
+	</svg>
+	<svg class="mo deco deco3" width="226" height="514" viewBox="0 0 226 514" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<path d="M226.5 501.5C188 501.5 164 483.5 164 441V170.893C164 122.098 88.329 122 88.329 170.893V331.544C88.329 388.5 12 388.5 12 331.544L12 69.5011C12 11.0011 63 12.0011 63 12.0011H226" stroke="var(--deco)" stroke-width="24"/>
+	</svg>
+	<svg class="mo deco deco4" width="72" height="128" viewBox="0 0 72 128" fill="var(--deco)" xmlns="http://www.w3.org/2000/svg">
+		<circle cx="8" cy="8" r="8"/><circle cx="36" cy="8" r="8"/><circle cx="64" cy="8" r="8"/><circle cx="8" cy="36" r="8"/><circle cx="36" cy="36" r="8"/><circle cx="64" cy="36" r="8"/><circle cx="8" cy="64" r="8"/><circle cx="36" cy="64" r="8"/><circle cx="64" cy="64" r="8"/><circle cx="8" cy="92" r="8"/><circle cx="36" cy="92" r="8"/><circle cx="64" cy="92" r="8"/><circle cx="8" cy="120" r="8"/><circle cx="36" cy="120" r="8"/><circle cx="64" cy="120" r="8"/>
 	</svg>
 	<header class="p32 between fs">
 		<svg width="144" height="144" viewBox="0 0 480 480" fill="var(--text)" xmlns="http://www.w3.org/2000/svg">
@@ -53,11 +59,6 @@
 			</address>
 			<div class="navs fc">
 				<nav class="fcol">
-					<a href="/">Inicio</a>
-					<a href="/talentos">Talentos</a>
-					<a href="https://wa.me/+51910880595" target="_blank">Contacto</a>
-				</nav>
-				<nav class="fcol">
 					<a href="https://www.instagram.com/joinstudio.tv/" target="_blank">TikTok</a>
 					<a href="https://www.instagram.com/joinstudio.tv/" target="_blank">Facebook</a>
 					<a href="https://www.instagram.com/joinstudio.tv/" target="_blank">Instagram</a>
@@ -69,18 +70,21 @@
 </article>
 
 <style>
-	.deco1, .deco2 {
-		z-index: -1;
-	}
-	.deco1 {
+	.deco1, .deco4 {
     top: 27%;
 	}
-	.deco2 {
-		top: 32px;
+	.deco2, .deco3 {
+		top: 0;
 		right: 0;
 	}
+	.deco4 {
+		left: 24px;
+	}
+	a {
+		font-weight: 400;
+	}
 	a:hover {
-		text-decoration: underline;
+		color: var(--text-low);
 	}
 	address {
 		font-style: normal;
@@ -125,14 +129,7 @@
 	.info .fcol {
 		align-items: flex-start;
 	}
-	@media (max-width: 1000px) {
-		.deco1 {
-			top: 72%;
-			left: -29%;
-		}
-		.deco2 {
-			right: -50%;
-		}
+	@media (max-width: 700px) {
 		.deco1 rect, .deco2 path {
 			stroke-width: 24
 		}
@@ -153,10 +150,18 @@
 		.info nav {
 			padding-right: 0;
 		}
+		.input {
+			width: 100%;
+		}
 		header svg {
 			width: 96px;
 			height: auto;
 			flex-shrink: 0;
+		}
+	}
+	@media (max-width: 360px) {
+		.deco3 {
+			right: -100px;
 		}
 	}
 </style>
