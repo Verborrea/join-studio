@@ -70,7 +70,7 @@
 		<rect x="495" y="146" width="475" height="126" rx="63" transform="rotate(-180 495 146)" stroke="var(--deco)" stroke-width="40"/>
 	</svg>
 	<section class="image rel">
-		<video id="video" autoplay playsinline bind:this={videoElement} onended={showReplay} poster={kombucha}>
+		<video id="video" playsinline bind:this={videoElement} onended={showReplay} poster={kombucha}>
 			<track kind="captions">
 		</video>
 		<div class="imgd abs fcol p32 g32">
