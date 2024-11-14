@@ -29,30 +29,10 @@
 
 <svelte:window bind:innerWidth={winw}/>
 
-<Header white={winw <= 1000}/>
-<svg class="abs deco3" width="1440" height="890" viewBox="0 0 1440 890" fill="none" xmlns="http://www.w3.org/2000/svg">
-	<path d="M1440 870H700.05C624.5 870 620 754.875 700.287 754.875L944.617 755.378C1022 755.378 1022 639.252 944.856 639.252H478.996C478.996 639.252 332.495 651.217 332.495 491.162V138.541C332.495 57.5131 285.499 20 215.495 20L0.000488281 20" stroke="#E4E4E4" stroke-width="40"/>
-</svg>
+<Header white={winw <= 700}/>
 <section class="contents rel fc p32 g32">
-	<svg class="abs deco2 mo" width="72" height="128" viewBox="0 0 72 128" fill="var(--deco)" xmlns="http://www.w3.org/2000/svg">
-		<circle cx="8" cy="8" r="8"/>
-		<circle cx="36" cy="8" r="8"/>
-		<circle cx="64" cy="8" r="8"/>
-		<circle cx="8" cy="36" r="8"/>
-		<circle cx="36" cy="36" r="8"/>
-		<circle cx="64" cy="36" r="8"/>
-		<circle cx="8" cy="64" r="8"/>
-		<circle cx="36" cy="64" r="8"/>
-		<circle cx="64" cy="64" r="8"/>
-		<circle cx="8" cy="92" r="8"/>
-		<circle cx="36" cy="92" r="8"/>
-		<circle cx="64" cy="92" r="8"/>
-		<circle cx="8" cy="120" r="8"/>
-		<circle cx="36" cy="120" r="8"/>
-		<circle cx="64" cy="120" r="8"/>
-	</svg>
-	<svg class="abs deco1 mo" width="195" height="171" viewBox="0 0 195 171" fill="none" xmlns="http://www.w3.org/2000/svg">
-		<rect x="12" y="12" width="259" height="147" rx="52" stroke="#E4E4E4" stroke-width="24"/>
+	<svg class="deco do deco1" width="515" height="166" viewBox="0 0 515 166" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<rect x="495" y="146" width="475" height="126" rx="63" transform="rotate(-180 495 146)" stroke="var(--deco)" stroke-width="40"/>
 	</svg>
 	<section class="image rel">
 		<video src="/videos/gaudi.webm" bind:this={videoElement} autoplay muted loop>
@@ -80,7 +60,13 @@
 			<a class="mo" href="#text">ver +</a>
 		</div>
 	</section>
-	<section class="grow fc g32">
+	<section class="grow rel fc g32">
+		<svg class="deco mo deco2" width="72" height="128" viewBox="0 0 72 128" fill="var(--deco)" xmlns="http://www.w3.org/2000/svg">
+			<circle cx="8" cy="8" r="8"/><circle cx="36" cy="8" r="8"/><circle cx="64" cy="8" r="8"/><circle cx="8" cy="36" r="8"/><circle cx="36" cy="36" r="8"/><circle cx="64" cy="36" r="8"/><circle cx="8" cy="64" r="8"/><circle cx="36" cy="64" r="8"/><circle cx="64" cy="64" r="8"/><circle cx="8" cy="92" r="8"/><circle cx="36" cy="92" r="8"/><circle cx="64" cy="92" r="8"/><circle cx="8" cy="120" r="8"/><circle cx="36" cy="120" r="8"/><circle cx="64" cy="120" r="8"/>
+		</svg>
+		<svg class="deco mo deco3" width="195" height="171" viewBox="0 0 195 171" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<rect x="12" y="12" width="259" height="147" rx="52" stroke="var(--deco)" stroke-width="24"/>
+		</svg>
 		<article id="text" class="text grow fcol g32">
 			<div class="fcol">
 				<h1>{$page.params.slug}</h1>
@@ -97,6 +83,18 @@
 <Footer/>
 
 <style>
+	.deco1 {
+		top: 25%;
+		right: 12%;
+	}
+	.deco2 {
+		top: 24px;
+		left: 24px;
+	}
+	.deco3 {
+		right: 0;
+		top: 48px;
+	}
 	.rel {
 		overflow-x: hidden;
 	}
@@ -123,6 +121,7 @@
 	.text {
 		width: 100%;
 		max-width: max(50vw, 800px);
+		align-self: flex-end;
 	}
 	.image {
 		height: 100%;
@@ -134,32 +133,16 @@
 		color: var(--text-low);
 	}
 	.link {
-		display: block;
-		padding: 0.5em 0.75em;
-		transition: 0.2s ease-in-out;
-		border-radius: 0.5em;
-		text-align: center;
+		display: inline-block;
+		font-size: 36px;
+		align-self: flex-start;
 	}
 	.link:hover {
-		background: var(--yel);
-	}
-	.deco1, .deco2, .deco3 {
-		z-index: -1;
-	}
-	.deco2 {
-		left: 24px;
-		top: calc(100% + 24px);
-	}
-	.deco1 {
-		top: 108%;
-		right: 0;
-	}
-	.deco3 {
-		top: 60%;
-		left: 0;
-		right: 0;
-		width: 100%;
-		height: unset;
+		will-change: background-position;
+		background: linear-gradient(90deg, var(--highlight) 50%, transparent 50%);
+		background-size: 200% 100%;
+		background-position: 0 0;
+		animation: markit 0.3s both ease-out;
 	}
 	.imgd {
 		display: flex;
@@ -179,7 +162,16 @@
 		background: white;
 		border-radius: 50%;
 	}
-	@media (max-width: 600px) {
+	@media (max-width: 1000px) {
+		h1 {
+			font-size: 48px;
+			word-break: break-word;
+		}
+		.desc, p, .link {
+			font-size: 24px;
+		}
+	}
+	@media (max-width: 700px) {
 		.mo {
 			display: block;
 		}
@@ -191,6 +183,8 @@
 		}
 		.link {
 			font-size: 24px;
+			align-self: center;
+			text-align: center;
 		}
 		article .fcol {
 			gap: 8px;
@@ -205,9 +199,6 @@
 		.contents > section {
 			height: 100dvh;
 		}
-		.deco3 {
-			top: 179%;
-		}
 		.contents {
 			display: contents;
 		}
@@ -215,14 +206,12 @@
 			width: 100%;
 			height: 100dvh;
 		}
-		.desc {
-			/* font-size: 28px; */
-		}
 		.content {
 			width: 100%;
 		}
 		.text {
 			padding: 24px;
+			align-self: center;
 		}
 	}
 </style>

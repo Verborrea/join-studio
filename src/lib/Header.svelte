@@ -1,7 +1,6 @@
 <script>
 	import { onMount } from "svelte";
 
-	let active = $state(false)
 	let mode = $state(false)
 	let isFullScreenSize = $state(false);
 	let { white = false } = $props();
@@ -46,8 +45,8 @@
 	})
 </script>
 
-<header class="fc between g32 p32">
-	<a href="/" id="title" class="title" class:white title="Inicio" aria-label="Inicio">
+<header class="fc between g32 p32" class:white>
+	<a href="/" id="title" class="title" title="Inicio" aria-label="Inicio">
 		<svg width="80" height="80" viewBox="0 0 480 480" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 			<path d="M396.888 342.22C405.051 333.706 410.828 323.027 413.476 311.515C426.296 323.422 449.078 308.309 440.767 291.628L343.997 54.1518C336.705 33.2468 303.027 46.5456 312.082 66.9884L397.718 277.123C424.049 341.499 329.346 381.349 302.574 317.1L222.019 119.397L252.218 102.336L334.691 304.694C342.4 325.688 375.879 311.545 366.674 292.045L279.039 76.9723C256.8 20.1599 341.583 -20.5374 372.588 34.3451L472.882 279.169C491.765 324.922 438.289 369.816 396.888 342.22Z"/>
 			<path d="M249.416 277.729L192.48 141.6C167.243 79.6798 73.5912 109.843 98.4 180L155.21 319.898C182.68 382.09 273.101 335.656 249.416 277.729ZM186.187 304.855L130.213 167.474C123.132 147.37 152.4 134.886 161.874 154.126L218.076 292.059C227.296 312.242 194.039 325.535 186.187 304.855Z"/>
@@ -64,16 +63,16 @@
 	<div class="fc g32">
 		<button type="button" aria-label="Cambiar tema" title="Cambiar tema" onclick={toggleTheme}>
 			{#if mode}
-				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
 			{:else}
-				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
 			{/if}
 		</button>
 		<button type="button" aria-label="Maximizar" title="Maximizar" onclick={toggleFullScreen}>
 			{#if isFullScreenSize}
-			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" x2="21" y1="10" y2="3"/><line x1="3" x2="10" y1="21" y2="14"/></svg>
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" x2="21" y1="10" y2="3"/><line x1="3" x2="10" y1="21" y2="14"/></svg>
 			{:else}
-			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" x2="14" y1="3" y2="10"/><line x1="3" x2="10" y1="21" y2="14"/></svg>
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" x2="14" y1="3" y2="10"/><line x1="3" x2="10" y1="21" y2="14"/></svg>
 			{/if}
 		</button>
 		<a href="https://wa.me/51910880595?text=Hola!" target="_blank" class="mo" title="Hablemos" aria-label="Hablemos">
@@ -90,17 +89,18 @@
 		position: absolute;
 		inset: 0 0 auto 0;
 	}
-	.title {
+	header button, .title {
 		color: inherit;
-		text-decoration: none;
+	}
+	header.white {
+		color: white;
+	}
+	.title {
 		font-weight: 500;
 		position: relative;
 		z-index: 1;
 	}
-	#title.white {
-		color: white;
-	}
-	@media (max-width: 1000px) {
+	@media (max-width: 700px) {
 		#title svg {
 			width: 56px;
 			height: 56px;
