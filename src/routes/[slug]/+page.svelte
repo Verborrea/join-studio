@@ -5,6 +5,7 @@
 	import { page } from '$app/stores'
 	import { onMount } from "svelte"
 	import Hls from 'hls.js'
+	import kombucha from '$lib/images/kombucha.avif';
 
 	const videoSrc = '/video_pipeline/video.m3u8';
 
@@ -69,10 +70,9 @@
 		<rect x="495" y="146" width="475" height="126" rx="63" transform="rotate(-180 495 146)" stroke="var(--deco)" stroke-width="40"/>
 	</svg>
 	<section class="image rel">
-		<video id="video" autoplay playsinline bind:this={videoElement} onended={showReplay}></video>
-		<!-- <video src="/video_pipeline/gaudi.webm" bind:this={videoElement} autoplay muted loop>
-			Tu navegador no admite el elemento <code>video</code>.
-		</video> -->
+		<video id="video" autoplay playsinline bind:this={videoElement} onended={showReplay} poster={kombucha}>
+			<track kind="captions">
+		</video>
 		<div class="imgd abs fcol p32 g32">
 			<div class="btns fcc g32">
 				{#if ended}
