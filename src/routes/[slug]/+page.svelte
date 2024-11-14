@@ -36,6 +36,7 @@
   }
 
 	function showReplay() {
+		console.log('show replay')
 		ended = true
 	}
 
