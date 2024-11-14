@@ -1,9 +1,5 @@
 <script>
-	import Header from '$lib/Header.svelte';
-	import Footer from '$lib/Footer.svelte';
-	import Rainbow from '$lib/Rainbow.svelte';
-	import { onMount } from 'svelte';
-	import { spring } from 'svelte/motion';
+	import { onMount } from 'svelte'
 
 	import kombucha from '$lib/images/kombucha.avif';
 	import don_luciano from '$lib/images/don_luciano.avif';
@@ -13,31 +9,31 @@
 
 	const products = [
 		{
-			title: 'Kombucha Gaudí',
+			title: 'Kombucha <strong class="c1">Gaudí</strong>',
 			slogan: 'Naturalmente poderosa.',
 			href: 'https://gaudi.pe',
 			src: '/videos/gaudi.webm'
 		},
 		{
-			title: 'Don Luciano',
+			title: '<strong class="c5">Don</strong> Luciano',
 			slogan: 'Licores que seducen.',
 			href: 'https://gaudi.pe',
 			src: '/videos/donlu.webm'
 		},
 		{
-			title: 'Emanuel Rivera',
+			title: 'Emanuel <strong class="c3">Rivera</strong>',
 			slogan: 'Melodias que conectan.',
 			href: 'https://gaudi.pe',
 			src: '/videos/rivera.webm'
 		},
 		{
-			title: 'Inmobiliria M Lujan',
+			title: 'Inmobiliria M <strong class="c4">Lujan</strong>',
 			slogan: 'La casa de tus sueños.',
 			href: 'https://gaudi.pe',
 			src: '/videos/lujan.webm'
 		},
 		{
-			title: 'Casa Shanti',
+			title: 'Casa <strong class="c2">Shanti</strong>',
 			slogan: 'Bienestar y sabores únicos.',
 			href: 'https://gaudi.pe',
 			src: '/videos/shanti.webm'
@@ -45,15 +41,14 @@
 	]
 	const preloadedImages = [kombucha, don_luciano, ema, lujan, shanti];
 
-	let coords = spring({ x: 300, y: 200 }, { stiffness: 0.08, damping: 0.3 });
-	let { show } = $props();
 	let isMobile = $state(false);
-	let headerInvisible = $state(false);
 	let index = $state(0);
 	let scrollPercentage = $state(0);
 	let text = $state('Explore más abajo');
 
-	let slider, main, fotos, stickyElement, video_container;
+	let slider, main, fotos, stickyElement = $state(), video_container;
+
+	let scrollTimeout;
 
 	const sectionSize = 100 / products.length;
 
@@ -66,28 +61,33 @@
 		return Math.pow(Math.sin(Math.PI * (x / 100)), 0.3);
 	}
 
+	function slideTo(section) {
+		window.scroll({top: window.innerHeight * (0.8 * (3 + section)), behavior: "smooth"})
+	}
+	function arreglar() {
+		slideTo(Math.min(Math.floor(scrollPercentage / sectionSize), products.length - 1))
+	}
+
 	function handleScroll() {
-		const { top } = fotos.getBoundingClientRect();
+		clearTimeout(scrollTimeout);
+
+		const { top, bottom } = fotos.getBoundingClientRect();
 
 		if (!isMobile) {
 			text = top < 35 ? 'Ver más' : 'Explore más abajo'
 		}
 
-		const { bottom: footer_bottom } = fotos.getBoundingClientRect();
-		headerInvisible = footer_bottom < 35;
-
-		const parentRect = fotos.getBoundingClientRect();
-
-		const distanceScrolled = parentRect.top * -1;
+		const distanceScrolled = top * -1;
 		const totalScrollableDistance = fotos.offsetHeight - stickyElement.offsetHeight;
 
 		scrollPercentage = (distanceScrolled / totalScrollableDistance) * 100;
 		scrollPercentage = Math.min(Math.max(scrollPercentage, 0), 100);
 
-		// TODO: simular snapping
+		if (top < 0 && bottom > window.innerHeight) {
+			scrollTimeout = setTimeout(arreglar, 100);
+		}
 
 		index = Math.min(Math.floor(scrollPercentage / sectionSize), products.length - 1);
-
 		slider.scroll((slider.scrollWidth - window.innerWidth) * scrollPercentage / 100, 0);
 	}
 
@@ -97,66 +97,25 @@
 
 	onMount(() => {
 		updateScreenSize();
-		if (isMobile) {
-			coords.set({ x: 0, y: 0 });
-		}
 	});
 </script>
 
 <svelte:window 
 	onresize={updateScreenSize}
 	onscroll={handleScroll}
-	onmousemove={(e) => { if (!isMobile) coords.set({ x: e.clientX, y: e.clientY }) }}
 />
 
-<main class:active={!show} bind:this={main}>
-	<svg class="abs deco1" width="100" height="260" viewBox="0 0 100 260" fill="none" xmlns="http://www.w3.org/2000/svg">
-		<rect x="12" y="12" width="76" height="236" rx="38" stroke="#DADADA" stroke-width="24"/>
-	</svg>
-	<svg class="abs deco2"width="123" height="98" viewBox="0 0 123 98" fill="none" xmlns="http://www.w3.org/2000/svg">
-		<rect x="-110" y="12" width="221" height="74" rx="37" stroke="#DADADA" stroke-width="24"/>
-	</svg>
-	<svg class="abs deco3" width="92" height="52" fill="#DADADA" viewBox="0 0 92 52" xmlns="http://www.w3.org/2000/svg">
-		<circle cx="6" cy="6" r="6"/>
-		<circle cx="26" cy="6" r="6"/>
-		<circle cx="46" cy="6" r="6"/>
-		<circle cx="66" cy="6" r="6"/>
-		<circle cx="86" cy="6" r="6"/>
-		<circle cx="6" cy="26" r="6"/>
-		<circle cx="26" cy="26" r="6"/>
-		<circle cx="46" cy="26" r="6"/>
-		<circle cx="66" cy="26" r="6"/>
-		<circle cx="86" cy="26" r="6"/>
-		<circle cx="6" cy="46" r="6"/>
-		<circle cx="26" cy="46" r="6"/>
-		<circle cx="46" cy="46" r="6"/>
-		<circle cx="66" cy="46" r="6"/>
-		<circle cx="86" cy="46" r="6"/>
-	</svg>
-	<Header/>
-	<section id="welcome" class="fcol fcc g32 p32">
-		<h1>Hola!</h1>
-		<p>
-			Somos <strong>Join Studio</strong> una agencia <Rainbow text="creativa"/> dedicada a contar historias que impactan.
-		</p>
-		{#if !headerInvisible}
-		<button type="button" class="btn fcc scroll" onclick={() => {
-			main.scrollBy({
-				top: window.innerHeight,
-				behavior: "smooth"
-			});
-		}} style="transform: translate({$coords.x}px, {$coords.y}px);">
-			{text}
-		</button>
-		{/if}
-	</section>
+<main bind:this={main}>
 	<div id="fotos" class="large" bind:this={fotos}>
-		<section class="sticky p32" bind:this={stickyElement}>
+		<section id="stickyElement" class="sticky p32" bind:this={stickyElement}>
+			<svg class="deco do deco1" width="961" height="738" viewBox="0 0 961 738" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M222 0C222 0 222 66 222 82.5C224.296 133 289.045 130 289.045 130H785.45C987.043 130 996.5 399 785.45 399H653C600.5 399 580.643 424 580.643 480V599C580.643 663 548 718 479 718H0" stroke="var(--deco)" stroke-width="40"/>
+			</svg>
 			<div class="text fcol" style="
 				opacity: {formaPico(scrollPercentage * 5 % 100)};
 				scale: {(scrollPercentage * 5 % 100)/200 + 0.75};
 			">
-				<h1>{products[index].title}</h1>
+				<h1>{@html products[index].title}</h1>
 				<p>{products[index].slogan}</p>
 			</div>
 			<div class="img" bind:this={video_container}>
@@ -170,10 +129,7 @@
 				{#each preloadedImages as img, idx}
 					<button
 						onclick={() => {
-							index = idx;
-							scrollPercentage = index * sectionSize + (50 / products.length);
-							console.log(scrollPercentage)
-							slider.scroll({left: scrollPercentage * window.innerWidth / 100, behavior: "smooth"});
+							slideTo(idx)
 						}}
 						type="button"
 						style="transform: translateY(-{idx === index ? 24 * formaPico(scrollPercentage * 5 % 100) : 0}px);">
@@ -183,25 +139,12 @@
 			</div>
 		</section>
 	</div>
-	<Footer/>
 </main>
 
 <style>
-	
-	svg.abs {
-		z-index: -1;
-	}
 	.deco1 {
-		right: 24px;
-		top: -90px;
-	}
-	.deco2 {
+		top: 0;
 		left: 0;
-		top: 67%;
-	}
-	.deco3 {
-		top: 18%;
-    left: 24px;
 	}
 	main {
 		display: contents;
@@ -211,36 +154,16 @@
 		scroll-snap-type: y mandatory;
 		scroll-behavior: smooth;
 	}
-	main>* {
-		opacity: 0;
-	}
-	main.active > * {
-		animation: help 1.2s;
-		opacity: 1;
-	}
-	#welcome, #fotos {
+	#fotos {
 		scroll-snap-align: center;
 	}
 	section {
 		min-height: 100dvh;
 	}
-	h1 {
-		font-size: 78px;
-		line-height: 1;
-	}
-	p strong {
-		background: var(--yel);
-	}
-	#welcome {
-		text-align: center;
-	}
-	#fotos p {
-		font-size: 24px;
-	}
 	video {
 		border-radius: 32px;
 		width: 100%;
-		height: calc(100dvh - 144px);
+		height: calc(100dvh - 64px);
 		aspect-ratio: 9 / 16;
 		position: absolute;
 		inset: 0;
@@ -271,7 +194,7 @@
 	}
 	.img {
 		align-self: flex-end;
-		height: calc(100dvh - 144px);
+		height: calc(100dvh - 64px);
     aspect-ratio: 9 / 16;
     position: relative;
 	}
@@ -279,35 +202,13 @@
 		gap: 16px;
 		position: absolute;
 		width: 100vw;
-		padding: 24px;
+		padding: 32px;
 		bottom: 0;
 		white-space: nowrap;
 		overflow-x: scroll;
+		z-index: 1;
 	}
-	#welcome {
-		position: relative;
-	}
-	#welcome p {
-		max-width: max(28ch, 50vw);
-	}
-	.scroll {
-		align-self: center;
-		color: inherit;
-		z-index: 2;
-		position: absolute;
-		font-size: 20px;
-		top: 0;
-		left: 0;
-		font-weight: 600;
-		line-height: 1;
-		font-size: 20px;
-		background: var(--klk);
-		backdrop-filter: blur(2px);
-	}
-	@media (max-width: 1000px) {
-		h1 {
-			font-size: 48px;
-		}
+	@media (max-width: 700px) {
 		.img video {
 			filter: brightness(0.6);
 			border-radius: 0;
@@ -330,13 +231,6 @@
 
 			color: var(--text);
 		}
-		#welcome {
-			align-items: unset;
-			gap: 24px;
-		}
-		#welcome p {
-			max-width: 100%;
-		}
 		.img {
 			position: absolute;
 			inset: 0;
@@ -344,28 +238,11 @@
 			aspect-ratio: unset;
 			height: 100%;
 		}
-		.scroll {
-			transform: none !important;
-			position: relative;
-			z-index: unset;
-			top: unset;
-			bottom: 48px;
-			left: 24px;
-			right: 24px;
-			width: fit-content;
-			position: absolute;
-			margin: auto;
-		}
 		.sticky {
 			grid-template-columns: 1fr;
 		}
 		.slider {
 			padding: 24px 50%;
-		}
-	}
-	@media (max-width: 700px) {
-		#welcome p {
-			font-size: 9vw;
 		}
 	}
 </style>

@@ -76,7 +76,7 @@
 				Hey! me encargo de <Rainbow text="diseñar"/> y <strong>desarrollar</strong> soluciones basadas en <em>tecnología</em>
 				para su empresa. Web, IA, seguridad, creación de sistemas, todo eso y más...
 			</p>
-			<a href="/#circle" class="link">Ver + talentos</a>
+			<a href="/#circle" class="link">Regresar a talentos</a>
 		</article>
 	</section>
 </section>
@@ -116,6 +116,7 @@
 		height: 100%;
 	}
 	.grow {
+		overflow-y: hidden;
 		justify-content: flex-start;
 	}
 	.text {
@@ -133,7 +134,8 @@
 		color: var(--text-low);
 	}
 	.link {
-		display: inline-block;
+		line-height: 1.5;
+		display: flex;
 		font-size: 36px;
 		align-self: flex-start;
 	}
