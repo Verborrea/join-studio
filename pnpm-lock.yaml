@@ -11,6 +11,9 @@ importers:
       '@sveltejs/adapter-netlify':
         specifier: ^4.3.6
         version: 4.3.6(@sveltejs/kit@2.7.3(@sveltejs/vite-plugin-svelte@4.0.0(svelte@5.1.3)(vite@5.4.10))(svelte@5.1.3)(vite@5.4.10))
+      hls.js:
+        specifier: ^1.5.17
+        version: 1.5.17
     devDependencies:
       '@sveltejs/adapter-auto':
         specifier: ^3.0.0
@@ -522,6 +525,9 @@ packages:
 
   globrex@0.1.2:
     resolution: {integrity: sha512-uHJgbwAMwNFf5mLst7IWLNg14x1CkeqglJb/K3doi4dw6q2IvAAmM/Y81kevy83wP+Sst+nutFTYOGg3d1lsxg==}
+
+  hls.js@1.5.17:
+    resolution: {integrity: sha512-wA66nnYFvQa1o4DO/BFgLNRKnBTVXpNeldGRBJ2Y0SvFtdwvFKCbqa9zhHoZLoxHhZ+jYsj3aIBkWQQCPNOhMw==}
 
   imagetools-core@7.0.1:
     resolution: {integrity: sha512-XDUx3Ac1VrZ4XF5eAJNYdHbFXRPNyebHFrwJsZ4WHb7X2MitOVW23cFphSDByT3MH5rdWdxKr4edSW2agChvDg==}
@@ -1048,6 +1054,8 @@ snapshots:
   globalyzer@0.1.0: {}
 
   globrex@0.1.2: {}
+
+  hls.js@1.5.17: {}
 
   imagetools-core@7.0.1: {}
 

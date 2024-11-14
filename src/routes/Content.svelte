@@ -46,7 +46,7 @@
 	let scrollPercentage = $state(0);
 	let text = $state('Explore más abajo');
 
-	let slider, main, fotos, stickyElement = $state(), video_container;
+	let slider, fotos, stickyElement = $state(), video_container;
 
 	let scrollTimeout;
 
@@ -84,16 +84,24 @@
 		scrollPercentage = Math.min(Math.max(scrollPercentage, 0), 100);
 
 		if (top < 0 && bottom > window.innerHeight) {
-			scrollTimeout = setTimeout(arreglar, 100);
+			scrollTimeout = setTimeout(arreglar, 800);
 		}
 
 		index = Math.min(Math.floor(scrollPercentage / sectionSize), products.length - 1);
 		slider.scroll((slider.scrollWidth - window.innerWidth) * scrollPercentage / 100, 0);
 	}
 
-	$effect(() => {
-		video_container.children[index].currentTime = 0;
-	})
+	// $effect(() => {
+	// 	video_container.children[index].currentTime = 0;
+	// })
+
+	function handleTimeUpdate(event) {
+		const video = event.target;
+		if (video.currentTime >= video.duration - 0.1) { // reinicia un poco antes de terminar
+			video.currentTime = 0;
+			video.play();
+		}
+	}
 
 	onMount(() => {
 		updateScreenSize();
@@ -105,58 +113,58 @@
 	onscroll={handleScroll}
 />
 
-<main bind:this={main}>
-	<div id="fotos" class="large" bind:this={fotos}>
-		<section id="stickyElement" class="sticky p32" bind:this={stickyElement}>
-			<svg class="deco do deco1" width="961" height="738" viewBox="0 0 961 738" fill="none" xmlns="http://www.w3.org/2000/svg">
-				<path d="M222 0C222 0 222 66 222 82.5C224.296 133 289.045 130 289.045 130H785.45C987.043 130 996.5 399 785.45 399H653C600.5 399 580.643 424 580.643 480V599C580.643 663 548 718 479 718H0" stroke="var(--deco)" stroke-width="40"/>
-			</svg>
-			<div class="text fcol" style="
-				opacity: {formaPico(scrollPercentage * 5 % 100)};
-				scale: {(scrollPercentage * 5 % 100)/200 + 0.75};
-			">
-				<h1>{@html products[index].title}</h1>
-				<p>{products[index].slogan}</p>
-			</div>
-			<div class="img" bind:this={video_container}>
-				{#each products as product, idx}
-					<video class:active={idx === index} src={product.src} autoplay muted loop>
-						Tu navegador no admite el elemento <code>video</code>.
-					</video>
-				{/each}
-			</div>
-			<div class="slider fc" bind:this={slider}>
-				{#each preloadedImages as img, idx}
-					<button
-						onclick={() => {
-							slideTo(idx)
-						}}
-						type="button"
-						style="transform: translateY(-{idx === index ? 24 * formaPico(scrollPercentage * 5 % 100) : 0}px);">
-						<img src={img} alt="Hola">
-					</button>
-				{/each}
-			</div>
-		</section>
-	</div>
-</main>
+<div id="fotos" class="large" bind:this={fotos}>
+	<section id="stickyElement" class="sticky p32" bind:this={stickyElement}>
+		<svg class="deco do deco1" width="961" height="738" viewBox="0 0 961 738" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<path d="M222 0C222 0 222 66 222 82.5C224.296 133 289.045 130 289.045 130H785.45C987.043 130 996.5 399 785.45 399H653C600.5 399 580.643 424 580.643 480V599C580.643 663 548 718 479 718H0" stroke="var(--deco)" stroke-width="40"/>
+		</svg>
+		<div class="text fcol" style="
+			opacity: {formaPico(scrollPercentage * 5 % 100)};
+			scale: {(scrollPercentage * 5 % 100)/200 + 0.75};
+		">
+			<h1>{@html products[index].title}</h1>
+			<p>{products[index].slogan}</p>
+		</div>
+		<div class="img" bind:this={video_container}>
+			{#each products as product, idx}
+				<video
+					id="video_{idx}"
+					class:active={idx === index}
+					src={product.src}
+					autoplay
+					muted
+					loop
+					playsinline
+					playsInline
+				>
+					Tu navegador no admite el elemento <code>video</code>.
+					<!-- ontimeupdate={handleTimeUpdate} -->
+				</video>
+			{/each}
+		</div>
+		<div class="slider fc" bind:this={slider}>
+			{#each preloadedImages as img, idx}
+				<button
+					onclick={() => {
+						slideTo(idx)
+					}}
+					type="button"
+					style="transform: translateY(-{idx === index ? 24 * formaPico(scrollPercentage * 5 % 100) : 0}px);">
+					<img src={img} alt="Hola">
+				</button>
+			{/each}
+		</div>
+	</section>
+</div>
 
 <style>
 	.deco1 {
 		top: 0;
 		left: 0;
 	}
-	main {
-		display: contents;
-		overflow-y: scroll;
-		
-		height: 100dvh;
-		scroll-snap-type: y mandatory;
-		scroll-behavior: smooth;
-	}
-	#fotos {
+	/* #fotos {
 		scroll-snap-align: center;
-	}
+	} */
 	section {
 		min-height: 100dvh;
 	}
@@ -169,7 +177,7 @@
 		inset: 0;
 	}
 	video.active {
-		z-index: 1;
+		z-index: 10;
 	}
 	.slider img {
 		height: 160px;
@@ -206,7 +214,7 @@
 		bottom: 0;
 		white-space: nowrap;
 		overflow-x: scroll;
-		z-index: 1;
+		z-index: 20;
 	}
 	@media (max-width: 700px) {
 		.img video {
@@ -219,7 +227,7 @@
 			--bg: #1E1E1E;
 			--text: #EFEFEF;
 			--text-low: #939393;
-			--text-input: #DADADA;
+			--text-input: #1C1D20;
 			--shadow: #3c3c3c;
 			--red: #FF6C6C;
 			--ora: #FF9D68;
@@ -228,6 +236,9 @@
 			--blu: #70C4EE;
 			--vio: #ED99EC;
 			--klk: #1E1E1E80;
+			--deco: #3e3e3e;
+			--deco2: #3e3e3e;
+			--highlight: #8862A7;
 
 			color: var(--text);
 		}

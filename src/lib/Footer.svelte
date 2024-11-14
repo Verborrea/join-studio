@@ -91,7 +91,7 @@
 	}
 	article {
 		overflow-x: hidden;
-		scroll-snap-align: center;
+		/* scroll-snap-align: center; */
 		min-height: 100svh;
 	}
 	form {

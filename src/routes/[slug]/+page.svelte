@@ -3,11 +3,16 @@
 	import Footer from "$lib/Footer.svelte"
 	import Rainbow from "$lib/Rainbow.svelte"
 	import { page } from '$app/stores'
+	import { onMount } from "svelte"
+	import Hls from 'hls.js'
+
+	const videoSrc = '/video_pipeline/video.m3u8';
 
 	let winw = $state();
 	let videoElement = $state();
-	let play = $state(true);
+	let play = $state(false);
 	let sound = $state(false);
+	let ended = $state(false);
 
 	function tooglePlay() {
 		play = !play
@@ -19,8 +24,37 @@
 	}
 
 	function toggleSound() {
-		sound = !sound
+		videoElement.muted = !videoElement.muted;
+    sound = videoElement.muted;
 	}
+
+	function replayVideo() {
+		ended = false
+		videoElement.currentTime = 0;
+		videoElement.play();
+  }
+
+	function showReplay() {
+		ended = true
+	}
+
+	onMount(() => {
+		if (Hls.isSupported()) {
+			// Si el navegador soporta HLS.js
+			const hls = new Hls();
+			hls.loadSource(videoSrc);
+			hls.attachMedia(videoElement);
+			hls.on(Hls.Events.MANIFEST_PARSED, function () {
+				videoElement.play();
+			});
+		} else if (videoElement.canPlayType('application/vnd.apple.mpegurl')) {
+			// Para navegadores como Safari que soportan HLS de forma nativa
+			videoElement.src = videoSrc;
+			videoElement.addEventListener('loadedmetadata', function () {
+			videoElement.play();
+			});
+		}
+	})
 </script>
 
 <svelte:head>
@@ -35,25 +69,32 @@
 		<rect x="495" y="146" width="475" height="126" rx="63" transform="rotate(-180 495 146)" stroke="var(--deco)" stroke-width="40"/>
 	</svg>
 	<section class="image rel">
-		<video src="/videos/gaudi.webm" bind:this={videoElement} autoplay muted loop>
+		<video id="video" autoplay playsinline bind:this={videoElement} onended={showReplay}></video>
+		<!-- <video src="/video_pipeline/gaudi.webm" bind:this={videoElement} autoplay muted loop>
 			Tu navegador no admite el elemento <code>video</code>.
-		</video>
+		</video> -->
 		<div class="imgd abs fcol p32 g32">
 			<div class="btns fcc g32">
-				<button class="fcc" type="button" title="Play/Pause" aria-label="Play/Pause" onclick={tooglePlay}>
-					{#if play}
-					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1C1D20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pause"><rect x="14" y="4" width="4" height="16" rx="1"/><rect x="6" y="4" width="4" height="16" rx="1"/></svg>
-					{:else}
-					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1C1D20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play"><polygon points="6 3 20 12 6 21 6 3"/></svg>
-					{/if}
-				</button>
-				<button  class="fcc" type="button" title="Toogle Mute" aria-label="Toogle Mute" onclick={toggleSound}>
-					{#if sound}
-					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1C1D20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-volume-off"><path d="M16 9a5 5 0 0 1 .95 2.293"/><path d="M19.364 5.636a9 9 0 0 1 1.889 9.96"/><path d="m2 2 20 20"/><path d="m7 7-.587.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298V11"/><path d="M9.828 4.172A.686.686 0 0 1 11 4.657v.686"/></svg>
-					{:else}
-					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1C1D20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-volume-2"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"/><path d="M16 9a5 5 0 0 1 0 6"/><path d="M19.364 18.364a9 9 0 0 0 0-12.728"/></svg>
-					{/if}
-				</button>
+				{#if ended}
+					<button class="fcc" type="button" title="Replay" aria-label="Replay" onclick={replayVideo}>
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1C1D20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-repeat"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg>
+					</button>
+				{:else}
+					<button class="fcc" type="button" title="Play/Pause" aria-label="Play/Pause" onclick={tooglePlay}>
+						{#if play}
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1C1D20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pause"><rect x="14" y="4" width="4" height="16" rx="1"/><rect x="6" y="4" width="4" height="16" rx="1"/></svg>
+						{:else}
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1C1D20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+						{/if}
+					</button>
+					<button class="fcc" type="button" title="Toogle Mute" aria-label="Toogle Mute" onclick={toggleSound}>
+						{#if sound}
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1C1D20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-volume-off"><path d="M16 9a5 5 0 0 1 .95 2.293"/><path d="M19.364 5.636a9 9 0 0 1 1.889 9.96"/><path d="m2 2 20 20"/><path d="m7 7-.587.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298V11"/><path d="M9.828 4.172A.686.686 0 0 1 11 4.657v.686"/></svg>
+						{:else}
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1C1D20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-volume-2"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"/><path d="M16 9a5 5 0 0 1 0 6"/><path d="M19.364 18.364a9 9 0 0 0 0-12.728"/></svg>
+						{/if}
+					</button>
+				{/if}
 			</div>
 			<h1 class="mo">{$page.params.slug}</h1>
 			<p class="desc mo">Arquitecto Digital</p>
@@ -138,13 +179,14 @@
 		display: flex;
 		font-size: 36px;
 		align-self: flex-start;
-	}
-	.link:hover {
 		will-change: background-position;
 		background: linear-gradient(90deg, var(--highlight) 50%, transparent 50%);
 		background-size: 200% 100%;
+		background-position: 100% 0;
+		transition: background-position 0.3s ease-out;
+	}
+	.link:hover {
 		background-position: 0 0;
-		animation: markit 0.3s both ease-out;
 	}
 	.imgd {
 		display: flex;

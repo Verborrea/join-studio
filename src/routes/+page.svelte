@@ -201,11 +201,13 @@
 		object-fit: cover;
 		border-radius: 32px;
 	}
+	.talentos .text, .talentos .deco1 {
+		z-index: 1;
+	}
 	.talentos .deco1 {
 		right: 0;
 		bottom: 0;
 		transform: translateY(20%);
-		z-index: 1;
 	}
 	.talentos .deco2 {
 		top: 64px;
