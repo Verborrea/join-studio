@@ -92,7 +92,7 @@
 	article {
 		overflow-x: hidden;
 		scroll-snap-align: center;
-		min-height: 100dvh;
+		min-height: 100svh;
 	}
 	form {
 		gap: 16px !important;

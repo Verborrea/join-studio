@@ -189,7 +189,7 @@
 	}
 
 	.talentos {
-		height: 100vh;
+		height: 100svh;
 	}
 	.talentos a {
 		gap: 16px;
