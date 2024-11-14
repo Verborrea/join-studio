@@ -2,17 +2,28 @@
 	import Header from '$lib/Header.svelte'
 	import Footer from '$lib/Footer.svelte'
 	import Rainbow from '$lib/Rainbow.svelte'
+	import Intro from './Intro.svelte'
 	import Content from './Content.svelte'
 	import Circle from './Circle.svelte'
 
 	import talentos from '$lib/images/talentos.avif'
+
+	let show = $state(false);
+
+	function showPage() {
+		setTimeout(() => {
+			show = true
+		}, 500)
+	}
 </script>
 
 <svelte:head>
 	<title>Join Studio • Agencia Creativa</title>
 </svelte:head>
 
-
+{#if !show}
+<Intro on:ready={showPage}/>
+{:else}
 <Header/>
 <main>
 	<section class="hero fcol fcc p32 g32 center">
@@ -63,15 +74,6 @@
 		<h1><span>Nuestros</span><br/><mark>proyectos</mark></h1>
 	</section>
 	<Content/>
-	<!-- <section class="videos fc">
-		<svg class="deco do deco1" width="961" height="738" viewBox="0 0 961 738" fill="none" xmlns="http://www.w3.org/2000/svg">
-			<path d="M222 0C222 0 222 66 222 82.5C224.296 133 289.045 130 289.045 130H785.45C987.043 130 996.5 399 785.45 399H653C600.5 399 580.643 424 580.643 480V599C580.643 663 548 718 479 718H0" stroke="var(--deco)" stroke-width="40"/>
-		</svg>
-		<div class="text fcol p32">
-			<h1>Kombucha <strong>Gaudí</strong></h1>
-			<p>Naturalmente Poderosa</p>
-		</div>
-	</section> -->
 	<section class="talentos fc p32 g32">
 		<svg class="deco do deco1" width="280" height="674" viewBox="0 0 280 674" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<path d="M280 654H91.035C34.2069 654 20 628.176 20 564.776L20 335.139C20.0001 304.286 45.6793 279.011 71.8137 279.011H135.767C193.957 279.011 188.444 208.338 188.444 208.338V96.0153C188.444 96.0153 188.444 20.0001 249.697 20H280" stroke="var(--deco)" stroke-width="40"/>
@@ -95,6 +97,7 @@
 	<Circle/>
 </main>
 <Footer/>
+{/if}
 
 <style>
 	main {
@@ -258,22 +261,3 @@
 		}
 	}
 </style>
-
-<!-- 
-// import Intro from './Intro.svelte'
-// import Content from './Content.svelte'
-
-// let show = $state(true);
-
-// function showPage() {
-// 	setTimeout(() => {
-// 		show = false
-// 	}, 500)
-// }
--->
-
-<!-- {#if show}
-<Intro on:ready={showPage}/>
-{:else}
-<Content {show}/>
-{/if} -->

@@ -8,9 +8,9 @@
 	let winh = $state(0)
 
 	let double = $derived(winw / 2)
-	let prev_0 = $derived((scroll - 4 * winh + 3 * 250) / 814)
-	let prev_1 = $derived((scroll - 4 * winh + 2 * 250) / 814)
-	let prev_2 = $derived((scroll - 4 * winh + 1 * 250) / 814)
+	let prev_0 = $derived((scroll - 8 * winh + 3 * 250) / 814)
+	let prev_1 = $derived((scroll - 8 * winh + 2 * 250) / 814)
+	let prev_2 = $derived((scroll - 8 * winh + 1 * 250) / 814)
 
 	const people = [
 		{ slug: "/Marko Manrique", name: 'Mark<span class="c0">o</span> Manrique', desc: 'Genio Creativo' },
@@ -62,7 +62,7 @@
 			</div>
 		</div>
 		{#each people as person, idx}
-		{@const val = (scroll - 4 * winh - idx * 250)/814 }
+		{@const val = (scroll - 8 * winh - idx * 250)/814 }
 			<a href=" {person.slug}" class:inactive={Math.abs(val) > 0.15} class="person abs fc g32" style="transform: translate({double * (Math.cos(val) - 1)}px, {-double*Math.sin(val)}px) rotate({-val}rad);">
 				<div class="fcol">
 					<h1>{@html person.name}</h1>

@@ -12,9 +12,7 @@
 
 <div class="container1">
 	<div class="up">Join</div>
-	<div class="down">
-		Studio
-	</div>
+	<div class="down">Studio</div>
 </div>
 
 <div class="container2 fcc">
@@ -55,7 +53,7 @@
 	.part1 {
 		white-space: nowrap;
 		text-align: center;
-		animation: smalltime 2s ease-out 2s backwards, bigtime_2 2s cubic-bezier(1, 0, 1, 1) 4s forwards;
+		animation: smalltime 1s cubic-bezier(0, 0, 0.2, 1) 2s backwards, bigtime_2 1s cubic-bezier(1, 0, 1, 1) 3s forwards;
 	}
 	.up, .down {
 		font-size: 10vw;
@@ -64,11 +62,11 @@
 	}
 	.up {
 		transform-origin: bottom;
-		animation: smalltime 1.25s ease-out 0s backwards, bigtime 3s ease-in 1.25s forwards;
+		animation: smalltime 1s cubic-bezier(0, 0, 0.2, 1) 0s backwards, bigtime 1s cubic-bezier(1, 0, 1, 1) 1s forwards;
 	}
 	.down {
 		transform-origin: top;
-		animation: smalltime 1.25s ease-out 0.5s backwards, bigtime 3s ease-in 1.75s forwards;
+		animation: smalltime 1s cubic-bezier(0, 0, 0.2, 1) 0s backwards, bigtime 1s cubic-bezier(1, 0, 1, 1) 1s forwards;
 	}
 	@media (max-width: 800px) {
 		svg {
