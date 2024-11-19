@@ -42,9 +42,6 @@
 	})
 </script>
 
-<svelte:head>
-	<title>Talentos • Join Studio</title>
-</svelte:head>
 <svelte:window bind:scrollY={scroll} bind:innerWidth={winw} on:resize={ayuda}/>
 
 <section id="circle" class="rel circle" bind:this={circle}>

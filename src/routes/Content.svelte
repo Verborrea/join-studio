@@ -24,7 +24,7 @@
 			title: 'Emanuel <strong class="c3">Rivera</strong>',
 			slogan: 'Melodias que conectan.',
 			href: 'https://gaudi.pe',
-			src: '/videos/rivera.webm'
+			src: '/videos/rivera.mp4'
 		},
 		{
 			title: 'Inmobiliria M <strong class="c4">Lujan</strong>',
@@ -36,7 +36,7 @@
 			title: 'Casa <strong class="c2">Shanti</strong>',
 			slogan: 'Bienestar y sabores únicos.',
 			href: 'https://gaudi.pe',
-			src: '/videos/shanti.webm'
+			src: '/videos/shanti.mp4'
 		}
 	]
 	const preloadedImages = [kombucha, don_luciano, ema, lujan, shanti];

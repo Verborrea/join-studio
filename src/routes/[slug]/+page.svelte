@@ -53,7 +53,7 @@
 			// Para navegadores como Safari que soportan HLS de forma nativa
 			videoElement.src = videoSrc;
 			videoElement.addEventListener('loadedmetadata', function () {
-			videoElement.play();
+			// videoElement.play();
 			});
 		}
 	})
