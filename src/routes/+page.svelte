@@ -21,7 +21,7 @@
 	<title>Join Studio • Agencia Creativa</title>
 </svelte:head>
 
-{#if show}
+{#if !show}
 <Intro on:ready={showPage}/>
 {:else}
 <Header/>
