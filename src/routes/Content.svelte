@@ -4,48 +4,51 @@
 	import kombucha from '$lib/images/kombucha.avif';
 	import don_luciano from '$lib/images/don_luciano.avif';
 	import ema from '$lib/images/ema.avif';
-	// import lujan from '$lib/images/lujan.avif';
+	import lujan from '$lib/images/lujan.avif';
 	import shanti from '$lib/images/shanti.avif';
-
-	// {
-	// 		title: 'Inmobiliria M <strong class="c4">Lujan</strong>',
-	// 		slogan: 'La casa de tus sueños.',
-	// 		href: 'https://gaudi.pe',
-	// 		src: '/videos/lujan.webm'
-	// 	},
 
 	const products = [
 		{
 			title: 'Kombucha <strong class="c1">Gaudí</strong>',
 			slogan: 'Naturalmente poderosa.',
 			href: 'https://gaudi.pe',
-			src: '/videos/gaudi.webm'
+			src: '/videos/gaudi.webm',
+			img: kombucha
 		},
 		{
 			title: '<strong class="c5">Don</strong> Luciano',
 			slogan: 'Licores que seducen.',
 			href: 'https://gaudi.pe',
-			src: '/videos/donlu.mp4'
+			src: '/videos/donlu.mp4',
+			img: don_luciano
 		},
 		{
 			title: 'Emanuel <strong class="c3">Rivera</strong>',
 			slogan: 'Melodias que conectan.',
 			href: 'https://gaudi.pe',
-			src: '/videos/rivera.mp4'
+			src: '/videos/rivera.mp4',
+			img: ema
 		},
 		{
 			title: 'Casa <strong class="c2">Shanti</strong>',
 			slogan: 'Bienestar y sabores únicos.',
 			href: 'https://gaudi.pe',
-			src: '/videos/shanti.mp4'
-		}
+			src: '/videos/shanti.mp4',
+			img: shanti
+		},
+		{
+			title: 'Siga <span class="c4">bajando</span>',
+			slogan: 'Para saber más sobre nosotros.',
+			href: 'https://gaudi.pe',
+			src: '/videos/lujan.webm',
+			img: lujan
+		},
 	]
-	const preloadedImages = [kombucha, don_luciano, ema, shanti];
 
 	let isMobile = $state(false);
 	let index = $state(0);
 	let scrollPercentage = $state(0);
-	let text = $state('Explore más abajo');
+	let totalScrollableDistance = $state(0);
 
 	let slider, fotos, stickyElement = $state(), video_container;
 
@@ -55,6 +58,7 @@
 
 	function updateScreenSize() {
 		isMobile = window.innerWidth < 1000
+		totalScrollableDistance = fotos.offsetHeight - stickyElement.offsetHeight
 		handleScroll()
 	};
 
@@ -63,7 +67,8 @@
 	}
 
 	function slideTo(section) {
-		window.scroll({top: window.innerHeight * (0.777 * (3 + section)), behavior: "smooth"})
+		const offset = (section + 0.5) / products.length
+		window.scroll({top: fotos.getBoundingClientRect().top + window.scrollY + totalScrollableDistance * offset, behavior: "smooth"})
 	}
 	function arreglar() {
 		slideTo(Math.min(Math.floor(scrollPercentage / sectionSize), products.length - 1))
@@ -74,14 +79,7 @@
 
 		const { top, bottom } = fotos.getBoundingClientRect();
 
-		if (!isMobile) {
-			text = top < 35 ? 'Ver más' : 'Explore más abajo'
-		}
-
-		const distanceScrolled = top * -1;
-		const totalScrollableDistance = fotos.offsetHeight - stickyElement.offsetHeight;
-
-		scrollPercentage = (distanceScrolled / totalScrollableDistance) * 100;
+		scrollPercentage = (-top / totalScrollableDistance) * 100;
 		scrollPercentage = Math.min(Math.max(scrollPercentage, 0), 100);
 
 		if (top < 0 && bottom > window.innerHeight) {
@@ -90,14 +88,6 @@
 
 		index = Math.min(Math.floor(scrollPercentage / sectionSize), products.length - 1);
 		slider.scroll((slider.scrollWidth - window.innerWidth) * scrollPercentage / 100, 0);
-	}
-
-	function handleTimeUpdate(event) {
-		const video = event.target;
-		if (video.currentTime >= video.duration - 0.1) {
-			video.currentTime = 0;
-			video.play();
-		}
 	}
 
 	onMount(() => {
@@ -135,12 +125,11 @@
 					playsInline
 				>
 					Tu navegador no admite el elemento <code>video</code>.
-					<!-- ontimeupdate={handleTimeUpdate} -->
 				</video>
 			{/each}
 		</div>
-		<div class="slider fc" bind:this={slider}>
-			{#each preloadedImages as img, idx}
+		<div id="slider" class="slider fc" bind:this={slider}>
+			{#each products.map(p => p.img) as img, idx}
 				<button
 					onclick={() => {
 						slideTo(idx)

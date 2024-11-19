@@ -53,7 +53,6 @@
 			// Para navegadores como Safari que soportan HLS de forma nativa
 			videoElement.src = videoSrc;
 			videoElement.addEventListener('loadedmetadata', function () {
-			// videoElement.play();
 			});
 		}
 	})
@@ -66,6 +65,7 @@
 <svelte:window bind:innerWidth={winw}/>
 
 <Header white={winw <= 700}/>
+<div class="topo abs"></div>
 <section class="contents rel fc p32 g32">
 	<svg class="deco do deco1" width="515" height="166" viewBox="0 0 515 166" fill="none" xmlns="http://www.w3.org/2000/svg">
 		<rect x="495" y="146" width="475" height="126" rx="63" transform="rotate(-180 495 146)" stroke="var(--deco)" stroke-width="40"/>
@@ -217,6 +217,13 @@
 		}
 	}
 	@media (max-width: 700px) {
+		.topo {
+			height: 150px;
+			left: 0;
+			right: 0;
+			background: linear-gradient(black 30%, transparent);
+			z-index: 1;
+		}
 		.mo {
 			display: block;
 		}
