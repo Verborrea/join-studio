@@ -3,6 +3,7 @@
 	import { createEventDispatcher, onMount } from 'svelte'
 
 	const dispatch = createEventDispatcher()
+	const colores = ['var(--red)', '#FF7F3A', '#FFCA3A', '#8AC926', '#1982C4', '#6A4C93', '#1C1D20'];
 
 	function finish(e) {
 		if (e.animationName === "bigtime_2") {
@@ -12,15 +13,10 @@
 
 	function showpaths(e) {
 		if (e.animationName === "bigtime") {
-			crearCopiasPath('jo');
-			crearCopiasPath('in', 1);
+			crearCopiasPath('jo', colores);
+			crearCopiasPath('in', colores, 1);
 		}
 	}
-
-	// onMount(() => {
-	// 	crearCopiasPath('jo');
-	// 	crearCopiasPath('in', 1);
-	// })
 </script>
 
 <div class="container1">

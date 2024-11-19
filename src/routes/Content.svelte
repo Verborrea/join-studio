@@ -4,8 +4,15 @@
 	import kombucha from '$lib/images/kombucha.avif';
 	import don_luciano from '$lib/images/don_luciano.avif';
 	import ema from '$lib/images/ema.avif';
-	import lujan from '$lib/images/lujan.avif';
+	// import lujan from '$lib/images/lujan.avif';
 	import shanti from '$lib/images/shanti.avif';
+
+	// {
+	// 		title: 'Inmobiliria M <strong class="c4">Lujan</strong>',
+	// 		slogan: 'La casa de tus sueños.',
+	// 		href: 'https://gaudi.pe',
+	// 		src: '/videos/lujan.webm'
+	// 	},
 
 	const products = [
 		{
@@ -18,7 +25,7 @@
 			title: '<strong class="c5">Don</strong> Luciano',
 			slogan: 'Licores que seducen.',
 			href: 'https://gaudi.pe',
-			src: '/videos/donlu.webm'
+			src: '/videos/donlu.mp4'
 		},
 		{
 			title: 'Emanuel <strong class="c3">Rivera</strong>',
@@ -27,19 +34,13 @@
 			src: '/videos/rivera.mp4'
 		},
 		{
-			title: 'Inmobiliria M <strong class="c4">Lujan</strong>',
-			slogan: 'La casa de tus sueños.',
-			href: 'https://gaudi.pe',
-			src: '/videos/lujan.webm'
-		},
-		{
 			title: 'Casa <strong class="c2">Shanti</strong>',
 			slogan: 'Bienestar y sabores únicos.',
 			href: 'https://gaudi.pe',
 			src: '/videos/shanti.mp4'
 		}
 	]
-	const preloadedImages = [kombucha, don_luciano, ema, lujan, shanti];
+	const preloadedImages = [kombucha, don_luciano, ema, shanti];
 
 	let isMobile = $state(false);
 	let index = $state(0);
@@ -62,7 +63,7 @@
 	}
 
 	function slideTo(section) {
-		window.scroll({top: window.innerHeight * (0.8 * (3 + section)), behavior: "smooth"})
+		window.scroll({top: window.innerHeight * (0.777 * (3 + section)), behavior: "smooth"})
 	}
 	function arreglar() {
 		slideTo(Math.min(Math.floor(scrollPercentage / sectionSize), products.length - 1))
@@ -91,13 +92,9 @@
 		slider.scroll((slider.scrollWidth - window.innerWidth) * scrollPercentage / 100, 0);
 	}
 
-	// $effect(() => {
-	// 	video_container.children[index].currentTime = 0;
-	// })
-
 	function handleTimeUpdate(event) {
 		const video = event.target;
-		if (video.currentTime >= video.duration - 0.1) { // reinicia un poco antes de terminar
+		if (video.currentTime >= video.duration - 0.1) {
 			video.currentTime = 0;
 			video.play();
 		}
@@ -119,8 +116,8 @@
 			<path d="M222 0C222 0 222 66 222 82.5C224.296 133 289.045 130 289.045 130H785.45C987.043 130 996.5 399 785.45 399H653C600.5 399 580.643 424 580.643 480V599C580.643 663 548 718 479 718H0" stroke="var(--deco)" stroke-width="40"/>
 		</svg>
 		<div class="text fcol" style="
-			opacity: {formaPico(scrollPercentage * 5 % 100)};
-			scale: {(scrollPercentage * 5 % 100)/200 + 0.75};
+			opacity: {formaPico(scrollPercentage * products.length % 100)};
+			scale: {(scrollPercentage * products.length % 100)/200 + 0.75};
 		">
 			<h1>{@html products[index].title}</h1>
 			<p>{products[index].slogan}</p>
@@ -149,7 +146,7 @@
 						slideTo(idx)
 					}}
 					type="button"
-					style="transform: translateY(-{idx === index ? 24 * formaPico(scrollPercentage * 5 % 100) : 0}px);">
+					style="transform: translateY(-{idx === index ? 24 * formaPico(scrollPercentage * products.length % 100) : 0}px);">
 					<img src={img} alt="Hola">
 				</button>
 			{/each}
@@ -162,9 +159,6 @@
 		top: 0;
 		left: 0;
 	}
-	/* #fotos {
-		scroll-snap-align: center;
-	} */
 	section {
 		min-height: 100dvh;
 	}
@@ -185,7 +179,7 @@
 		border-radius: 12px;
 	}
 	.large {
-		min-height: 500dvh;
+		min-height: 400dvh;
 	}
 	.sticky {
 		position: sticky;

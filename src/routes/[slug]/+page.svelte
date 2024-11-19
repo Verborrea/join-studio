@@ -47,7 +47,7 @@
 			hls.loadSource(videoSrc);
 			hls.attachMedia(videoElement);
 			hls.on(Hls.Events.MANIFEST_PARSED, function () {
-				videoElement.play();
+				// videoElement.play();
 			});
 		} else if (videoElement.canPlayType('application/vnd.apple.mpegurl')) {
 			// Para navegadores como Safari que soportan HLS de forma nativa
