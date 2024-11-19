@@ -21,7 +21,7 @@
 	<title>Join Studio • Agencia Creativa</title>
 </svelte:head>
 
-{#if !show}
+{#if show}
 <Intro on:ready={showPage}/>
 {:else}
 <Header/>
@@ -71,7 +71,7 @@
 			<circle cx="8" cy="8" r="8"/><circle cx="36" cy="8" r="8"/><circle cx="64" cy="8" r="8"/><circle cx="92" cy="8" r="8"/><circle cx="120" cy="8" r="8"/><circle cx="148" cy="8" r="8"/><circle cx="176" cy="8" r="8"/><circle cx="204" cy="8" r="8"/><circle cx="232" cy="8" r="8"/><circle cx="260" cy="8" r="8"/><circle cx="8" cy="36" r="8"/><circle cx="36" cy="36" r="8"/><circle cx="64" cy="36" r="8"/><circle cx="92" cy="36" r="8"/><circle cx="120" cy="36" r="8"/><circle cx="148" cy="36" r="8"/><circle cx="176" cy="36" r="8"/><circle cx="204" cy="36" r="8"/><circle cx="232" cy="36" r="8"/><circle cx="260" cy="36" r="8"/><circle cx="8" cy="64" r="8"/><circle cx="36" cy="64" r="8"/><circle cx="64" cy="64" r="8"/><circle cx="92" cy="64" r="8"/><circle cx="120" cy="64" r="8"/><circle cx="148" cy="64" r="8"/><circle cx="176" cy="64" r="8"/><circle cx="204" cy="64" r="8"/><circle cx="232" cy="64" r="8"/><circle cx="260" cy="64" r="8" fill="var(--deco)"/>
 		</svg>
 		<div class="deco do deco6"></div>
-		<h1><span>Nuestros</span><br/><mark>proyectos</mark></h1>
+		<h1 class="center">Nuestros<br/><s>clientes</s><br/><mark>amigos</mark></h1>
 	</section>
 	<Content/>
 	<section class="talentos fc p32 g32">
@@ -152,12 +152,6 @@
 	.proyectos h1{
 		font-weight: 600;
 		font-size: 9vw;
-	}
-	.proyectos span {
-		transform: translateX(-1ch);
-	}
-	.proyectos mark {
-		transform: translateX(1ch);
 	}
 	.proyectos .deco1 {
 		left: 0;

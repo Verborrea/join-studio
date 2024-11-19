@@ -13,24 +13,22 @@
 	let prev_2 = $derived((scroll - 8 * winh + 1 * 250) / 814)
 
 	const people = [
-		{ slug: "/Marko Manrique", name: 'Mark<span class="c0">o</span> Manrique', desc: 'Genio Creativo' },
-		{ slug: "/Gustavo Injoque", name: '<span class="c1">G</span>ustavo Inojoque', desc: 'Filmmaker' },
-		{ slug: "/Javier Villanueva", name: 'Javier <span class="c2">V</span>illanueva', desc: 'Productor' },
-		{ slug: "/Adriana Velazco", name: 'Adrian<span class="c3">a</span> Velazco', desc: 'Diseñadora Gráfica' },
-		{ slug: "/Alan Monroy", name: 'Alan <span class="c4">M</span>onroy', desc: 'Desarrollador Web' },
-		{ slug: "/Juan Carlos Llanos", name: 'Juan Carl<span class="c5">o</span>s Llanos', desc: 'Experto en reputación' },
-		{ slug: "/Carlos Solis", name: 'Ca<span class="c0">r</span>los Solis', desc: 'Productor' },
-		{ slug: "/César Soplin", name: 'César <span class="c1">s</span>oplin', desc: 'Creador Digital' },
-		{ slug: "/Erick Porroa", name: 'Eric<span class="c2">k</span> Porroa', desc: 'Productor' },
+		{ color: 'var(--red)', slug: "/Marko J Manrique", name: 'Mark<span class="c0">o</span> J Manrique', desc: 'Encantador de serpientes 🐍' },
+		{ color: 'var(--ora)', slug: "/Guz Injoque", name: '<span class="c1">G</span>uz Inojoque', desc: 'Filmmaker 🎬' },
+		{ color: 'var(--yel)', slug: "/Javier Villanueva", name: 'Javier <span class="c2">V</span>illanueva', desc: 'Productor 🎥' },
+		{ color: 'var(--gre)', slug: "/Adriana Velazco", name: 'Adrian<span class="c3">a</span> Velazco', desc: 'Diseñadora Gráfica 🖌️' },
+		{ color: 'var(--blu)', slug: "/Alan Monroy", name: 'Alan <span class="c4">M</span>onroy', desc: 'Desarrollador Web 💻' },
+		{ color: 'var(--vio)', slug: "/Juan Carlos Llanos", name: 'Juan Carl<span class="c5">o</span>s Llanos', desc: 'Experto en reputación' },
+		{ color: 'var(--red)', slug: "/Carlos Solis", name: 'Ca<span class="c0">r</span>los Solis', desc: 'Productor' },
+		{ color: 'var(--ora)', slug: "/César Soplin", name: 'César <span class="c1">s</span>oplin', desc: 'Creador Digital' },
+		{ color: 'var(--yel)', slug: "/Erick Porroa", name: 'Eric<span class="c2">k</span> Porroa', desc: 'Productor' },
 
-		{ slug: "/", name: 'Join Studio', desc: 'Agencia Creativa' },
-		{ slug: "/", name: 'Escribenos', desc: 'Estamos para tí' },
-		{ slug: "/", name: 'Join Studio', desc: 'Agencia Creativa' },
-		{ slug: "/", name: 'Escribenos', desc: 'Estamos para tí' },
-		{ slug: "/", name: 'Join Studio', desc: 'Agencia Creativa' },
-		{ slug: "/", name: 'Escribenos', desc: 'Estamos para tí' },
-		{ slug: "/", name: 'Join Studio', desc: 'Agencia Creativa' },
-		{ slug: "/", name: 'Escribenos', desc: 'Estamos para tí' },
+		{ color: 'var(--red)', slug: "https://wa.me/51910880595?text=Hola!", name: 'Escribenos', desc: 'Estamos para tí' },
+		{ color: 'var(--red)', slug: "https://wa.me/51910880595?text=Hola!", name: 'Join Studio', desc: 'Agencia Creativa' },
+		{ color: 'var(--red)', slug: "https://wa.me/51910880595?text=Hola!", name: 'Escribenos', desc: 'Estamos para tí' },
+		{ color: 'var(--red)', slug: "https://wa.me/51910880595?text=Hola!", name: 'Join Studio', desc: 'Agencia Creativa' },
+		{ color: 'var(--red)', slug: "https://wa.me/51910880595?text=Hola!", name: 'Escribenos', desc: 'Estamos para tí' },
+		{ color: 'var(--red)', slug: "https://wa.me/51910880595?text=Hola!", name: 'Join Studio', desc: 'Agencia Creativa' },
 	]
 
 	function ayuda() {
@@ -46,19 +44,19 @@
 
 <section id="circle" class="rel circle" bind:this={circle}>
 	<div class="sticky fcol p32">
-		<div class:inactive={Math.abs(prev_0) > 0.15} class="person abs fc g32" style="transform: translate({double * (Math.cos(prev_0) - 1)}px, {-double*Math.sin(prev_0)}px) rotate({-prev_0}rad);">
+		<div class:inactive={Math.abs(prev_0) > 0.15} class="person abs fc g32" style="--color: red ;transform: translate({double * (Math.cos(prev_0) - 1)}px, {-double*Math.sin(prev_0)}px) rotate({-prev_0}rad);">
 			<div class="fcol">
 				<h1>Bienvenido a</h1>
 				<p>Join Studio</p>
 			</div>
 		</div>
-		<div class:inactive={Math.abs(prev_1) > 0.15} class="person abs fc g32" style="transform: translate({double * (Math.cos(prev_1) - 1)}px, {-double*Math.sin(prev_1)}px) rotate({-prev_1}rad);">
+		<div class:inactive={Math.abs(prev_1) > 0.15} class="person abs fc g32" style="--color: red ;transform: translate({double * (Math.cos(prev_1) - 1)}px, {-double*Math.sin(prev_1)}px) rotate({-prev_1}rad);">
 			<div class="fcol">
 				<h1>Somos un estudio</h1>
 				<p>Lleno de talentos</p>
 			</div>
 		</div>
-		<div class:inactive={Math.abs(prev_2) > 0.15} class="person abs fc g32" style="transform: translate({double * (Math.cos(prev_2) - 1)}px, {-double*Math.sin(prev_2)}px) rotate({-prev_2}rad);">
+		<div class:inactive={Math.abs(prev_2) > 0.15} class="person abs fc g32" style="--color: red ;transform: translate({double * (Math.cos(prev_2) - 1)}px, {-double*Math.sin(prev_2)}px) rotate({-prev_2}rad);">
 			<div class="fcol">
 				<h1>Haga Click</h1>
 				<p>Para aprender más</p>
@@ -66,7 +64,7 @@
 		</div>
 		{#each people as person, idx}
 		{@const val = (scroll - 8 * winh - idx * 250)/814 }
-			<a href=" {person.slug}" class:inactive={Math.abs(val) > 0.15} class="person abs fc g32" style="transform: translate({double * (Math.cos(val) - 1)}px, {-double*Math.sin(val)}px) rotate({-val}rad);">
+			<a href="{person.slug}" class:inactive={Math.abs(val) > 0.15} class="person abs fc g32" style="--color: {person.color} ;transform: translate({double * (Math.cos(val) - 1)}px, {-double*Math.sin(val)}px) rotate({-val}rad);">
 				<div class="fcol">
 					<h1>{@html person.name}</h1>
 					<p>{person.desc}</p>
@@ -112,7 +110,7 @@
 		content: '';
 		flex-shrink: 0;
 		border-radius: 50%;
-		background: var(--red);
+		background: var(--color);
 		width: 3.5vw;
 		height: 3.5vw;
 		opacity: 1;
