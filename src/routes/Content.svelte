@@ -1,6 +1,7 @@
 <script>
 	import { onMount } from 'svelte'
 
+	import salamanto from '$lib/images/salamanto.webp';
 	import kombucha from '$lib/images/kombucha.avif';
 	import don_luciano from '$lib/images/don_luciano.avif';
 	import ema from '$lib/images/ema.avif';
@@ -8,6 +9,13 @@
 	import shanti from '$lib/images/shanti.avif';
 
 	const products = [
+		{
+			title: 'Espacio <strong class="c8">Salamanto</strong>',
+			slogan: 'Cocina peruana por Paul Perea.',
+			href: 'https://www.instagram.com/salamanto.peru/',
+			src: '/videos/salamanto.mp4',
+			img: salamanto
+		},
 		{
 			title: 'Kombucha <strong class="c1">Gaudí</strong>',
 			slogan: 'Naturalmente poderosa.',

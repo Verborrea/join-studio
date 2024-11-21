@@ -111,6 +111,10 @@ a:active, button:active {
 .c4 { color: var(--blu); animation-name: breathing_5 }
 .c5 { color: var(--vio); animation-name: breathing_6 }
 
+.c8 {
+	color: #79583c;
+}
+
 @media (max-width: 1000px) {
 	h1 {
 		font-size: 72px;
